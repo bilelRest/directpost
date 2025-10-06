@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{template}">
+<head>
+    <title>Reçu - Dépôt Passager</title>
+    <style>
+        .receipt-container {
+            max-width: 600px;
+            margin: 1rem auto;
+            background: white;
+            padding: 1rem;
+        }
+
+        .header {
+            text-align: center;
+            border-bottom: 2px solid #005BAE;
+            padding-bottom: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .tracking-number {
+            background: #005BAE;
+            color: white;
+            padding: 0.5rem;
+            text-align: center;
+            font-weight: bold;
+            margin: 0.5rem 0;
+        }
+
+        .section {
+            margin: 0.8rem 0;
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+        }
+
+        .section-title {
+            font-weight: bold;
+            border-bottom: 1px solid #005BAE;
+            padding-bottom: 0.3rem;
+            margin-bottom: 0.5rem;
+            color: #005BAE;
+        }
+
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            margin: 0.3rem 0;
+            font-size: 0.9rem;
+        }
+
+        .total {
+            font-weight: bold;
+            font-size: 1.1rem;
+            text-align: right;
+            margin-top: 0.5rem;
+            border-top: 2px solid #005BAE;
+            padding-top: 0.5rem;
+            color: #005BAE;
+        }
+
+        .print-btn {
+            text-align: center;
+            margin: 1rem 0;
+        }
+
+        /* Masquer tout sauf le reçu à l'impression */
+        @media print {
+            body * {
+                visibility: hidden;
+            }
+            .receipt-container, .receipt-container * {
+                visibility: visible;
+            }
+            .receipt-container {
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+                margin: 0;
+                padding: 0.5cm;
+                box-shadow: none;
+            }
+            .print-btn {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div layout:fragment="content1">
+    <div class="receipt-container">
+        <!-- En-tête -->
+        <div class="header">
+            <h2 style="color: #005BAE;">LA POSTE TUNISIENNE</h2>
+            <p style="font-weight: bold; color: #005BAE;">AGENCE RAPIDE POSTE SFAX ELBOUSTEN</p>
+            <p>Reçu de Dépôt Passager</p>
+            <p th:text="${#dates.format(#dates.createNow(), 'dd/MM/yyyy à HH:mm')}"></p>
+        </div>
+
+        <!-- Numéro de suivi -->
+        <div class="tracking-number" th:text="${track}">
+            NUMERO_SUIVI
+        </div>
+
+        <!-- Informations Expéditeur -->
+        <div class="section">
+            <div class="section-title">Expéditeur</div>
+            <div th:if="${parcel != null && parcel.sender != null}">
+                <div class="info-row">
+                    <span>Nom:</span>
+                    <span th:text="${parcel.sender.sendName}"></span>
+                </div>
+                <div class="info-row">
+                    <span>Téléphone:</span>
+                    <span th:text="${parcel.sender.sendTel}"></span>
+                </div>
+                <div class="info-row">
+                    <span>Adresse:</span>
+                    <span th:text="${parcel.sender.adress}"></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Informations Destinataire -->
+        <div class="section">
+            <div class="section-title">Destinataire</div>
+            <div th:if="${parcel != null && parcel.receiver != null}">
+                <div class="info-row">
+                    <span>Nom:</span>
+                    <span th:text="${parcel.receiver.recName}"></span>
+                </div>
+                <div class="info-row">
+                    <span>Téléphone:</span>
+                    <span th:text="${parcel.receiver.recTel}"></span>
+                </div>
+                <div class="info-row">
+                    <span>Adresse:</span>
+                    <span th:text="${parcel.receiver.adress}"></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Détails du colis -->
+        <div class="section">
+            <div class="section-title">Détails du Colis</div>
+            <div class="info-row">
+                <span>Poids:</span>
+                <span th:if="${parcel != null && parcel.weight != null}" th:text="${parcel.weight + ' kg'}"></span>
+            </div>
+            <div class="info-row" th:if="${parcel != null && parcel.lenght != null}">
+                <span>Dimensions:</span>
+                <span th:text="${parcel.lenght + ' x ' + parcel.width + ' x ' + parcel.height + ' cm'}"></span>
+            </div>
+            <div class="info-row">
+                <span>Service:</span>
+                <span>Dépôt Passager</span>
+            </div>
+        </div>
+
+        <!-- Montant -->
+        <div class="section">
+            <div class="section-title">Montant</div>
+            <div class="info-row">
+                <span>Prix du colis:</span>
+                <span th:if="${parcel != null && parcel.price != null}" th:text="${parcel.price + ' TND'}"></span>
+                <span th:if="${parcel == null || parcel.price == null}" style="color: #666;">Non spécifié</span>
+            </div>
+            <div class="total">
+                MONTANT TOTAL: 
+                <span th:if="${parcel != null && parcel.price != null}" th:text="${parcel.price + ' TND'}"></span>
+                <span th:if="${parcel == null || parcel.price == null}" style="color: #666;">Non spécifié</span>
+            </div>
+        </div>
+
+        <!-- Instructions -->
+        <div style="text-align: center; margin-top: 1rem; font-size: 0.8rem; color: #666;">
+            <p>Conservez ce numéro de suivi: <strong th:text="${track}"></strong></p>
+            <p>Service Client: +216 70 000 000</p>
+        </div>
+
+        <!-- Bouton d'impression -->
+        <div class="print-btn">
+            <button onclick="window.print()" style="padding: 0.5rem 1rem; background: #005BAE; color: white; border: none; cursor: pointer;">
+                Imprimer le Reçu
+            </button>
+            <a th:href="@{/welcome}" style="margin-left: 1rem; padding: 0.5rem 1rem; background: #666; color: white; text-decoration: none;">
+                Retour Accueil
+            </a>
+        </div>
+    </div>
+
+    <script>
+        // Attendre que le DOM soit complètement chargé
+        document.addEventListener('DOMContentLoaded', function() {
+            // Petit délai pour s'assurer que tout est rendu
+            setTimeout(function() {
+                window.print();
+            }, 500);
+        });
+    </script>
+</div>
+
+</body>
+</html>
