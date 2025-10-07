@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{template}">
+<head>
+    <title>Suivi des Colis</title>
+    <style>
+        .tracking-container {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            padding: 2rem;
+            margin: 1rem auto;
+        }
+
+        .filter-section {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            border-left: 4px solid #005BAE;
+        }
+
+        .stats-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            border-top: 4px solid #005BAE;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #005BAE;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: #6c757d;
+            font-weight: 500;
+        }
+
+        .table-container {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.08);
+        }
+
+        .table-custom {
+            margin: 0;
+        }
+
+        .table-custom thead th {
+            background: #005BAE;
+            color: white;
+            border: none;
+            padding: 1rem;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .table-custom tbody td {
+            padding: 1rem;
+            vertical-align: middle;
+            border-color: #f1f3f4;
+        }
+
+        .table-custom tbody tr:hover {
+            background-color: #f8f9fa;
+        }
+
+        .status-badge {
+            padding: 0.4rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .status-enregistre {
+            background: #e7f7ef;
+            color: #2ecc71;
+        }
+
+        .btn-primary-custom {
+            background: linear-gradient(135deg, #005BAE, #003d7a);
+            border: none;
+            border-radius: 8px;
+            padding: 0.6rem 1.5rem;
+            font-weight: 600;
+        }
+
+        .btn-outline-custom {
+            border: 2px solid #005BAE;
+            color: #005BAE;
+            border-radius: 8px;
+            padding: 0.6rem 1.5rem;
+            font-weight: 600;
+            background: transparent;
+        }
+
+        .btn-outline-custom:hover {
+            background: #005BAE;
+            color: white;
+        }
+
+        .action-buttons .btn {
+            margin: 0 0.2rem;
+            padding: 0.3rem 0.6rem;
+            font-size: 0.8rem;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 3rem;
+            color: #6c757d;
+        }
+
+        .empty-state i {
+            font-size: 3rem;
+            color: #dee2e6;
+            margin-bottom: 1rem;
+        }
+
+        .dimensions {
+            font-size: 0.8rem;
+            color: #6c757d;
+        }
+
+        @media (max-width: 768px) {
+            .tracking-container {
+                padding: 1rem;
+                margin: 0.5rem;
+            }
+
+            .stats-cards {
+                grid-template-columns: 1fr;
+            }
+
+            .table-responsive {
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div layout:fragment="content1">
+    <div class="container-fluid mt-4">
+        <div class="tracking-container">
+            <!-- En-tête -->
+            <div class="row align-items-center mb-4">
+                <div class="col">
+                    <h2 class="mb-1" style="color: #005BAE;">
+                        <i class="bi bi-clipboard-data me-2"></i>Suivi des Colis
+                    </h2>
+                    <p class="text-muted mb-0">Gestion et suivi de tous vos envois</p>
+                </div>
+                <div class="col-auto">
+                    <button class="btn btn-primary-custom">
+                        <i class="bi bi-download me-2"></i>Exporter
+                    </button>
+                </div>
+            </div>
+
+            <!-- Filtres -->
+            <div class="filter-section">
+                <form th:action="@{/suivie}" method="get">
+                    <div class="row g-3 align-items-end">
+                        <div class="col-md-4">
+                            <label class="form-label fw-bold">Date de début</label>
+                            <input type="date" class="form-control" name="dateDebut" th:value="${dateDebut}">
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label fw-bold">Date de fin</label>
+                            <input type="date" class="form-control" name="dateFin" th:value="${dateFin}">
+                        </div>
+                        <div class="col-md-4">
+                            <button type="submit" class="btn btn-primary-custom w-100">
+                                <i class="bi bi-funnel me-1"></i>Filtrer
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Cartes de statistiques -->
+            <div class="stats-cards">
+                <div class="stat-card">
+                    <div class="stat-number" th:text="${totalColis} ?: 0">0</div>
+                    <div class="stat-label">Total Colis</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" th:text="${colisAujourdhui} ?: 0">0</div>
+                    <div class="stat-label">Aujourd'hui</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" th:text="${totalRevenue} ?: 0">0</div>
+                    <div class="stat-label">Revenue Total (TND)</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" th:text="${poidsTotal} ?: 0">0</div>
+                    <div class="stat-label">Poids Total (kg)</div>
+                </div>
+            </div>
+
+            <!-- Tableau des colis -->
+            <div class="table-container">
+                <div class="table-responsive">
+                    <table class="table table-custom table-hover">
+                        <thead>
+                        <tr>
+                            <th>N° Suivi</th>
+                            <th>Expéditeur</th>
+                            <th>Destinataire</th>
+                            <th>Poids</th>
+                            <th>Dimensions</th>
+                            <th>Prix</th>
+                            <th>Date</th>
+                            <th>Statut</th>
+                            <th>Actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="parcel : ${parcels}" th:if="${parcels != null and !parcels.empty}">
+                            <td>
+                                <strong th:text="${parcel.trackingNumber?.formattedParcelId}">-</strong>
+                            </td>
+                            <td>
+                                <div th:if="${parcel.sender != null}">
+                                    <div class="fw-bold" th:text="${parcel.sender.sendName}"></div>
+                                    <small class="text-muted" th:text="${parcel.sender.sendTel}"></small>
+                                </div>
+                                <span th:if="${parcel.sender == null}" class="text-muted">-</span>
+                            </td>
+                            <td>
+                                <div th:if="${parcel.receiver != null}">
+                                    <div class="fw-bold" th:text="${parcel.receiver.recName}"></div>
+                                    <small class="text-muted" th:text="${parcel.receiver.recTel}"></small>
+                                </div>
+                                <span th:if="${parcel.receiver == null}" class="text-muted">-</span>
+                            </td>
+                            <td>
+                                <span th:if="${parcel.weight != null}" th:text="${parcel.weight} + ' kg'">-</span>
+                                <span th:if="${parcel.weight == null}" class="text-muted">-</span>
+                            </td>
+                            <td>
+                                <div class="dimensions"
+                                     th:if="${parcel.lenght != null and parcel.width != null and parcel.height != null}"
+                                     th:text="${parcel.lenght} + '×' + ${parcel.width} + '×' + ${parcel.height} + ' cm'">
+                                </div>
+                                <span th:if="${parcel.lenght == null}" class="text-muted">-</span>
+                            </td>
+                            <td>
+                                    <span class="fw-bold text-success"
+                                          th:if="${parcel.price != null}"
+                                          th:text="${parcel.price} + ' TND'">-</span>
+                                <span th:if="${parcel.price == null}" class="text-muted">-</span>
+                            </td>
+                            <td>
+                                <small th:if="${parcel.trackingNumber?.createdAt != null}"
+                                       th:text="${#temporals.format(parcel.trackingNumber.createdAt, 'dd/MM/yyyy')}">-</small>
+                                <span th:if="${parcel.trackingNumber?.createdAt == null}" class="text-muted">-</span>
+                            </td>
+                            <td>
+                                    <span class="status-badge status-enregistre">
+                                        <i class="bi bi-check-circle me-1"></i>Enregistré
+                                    </span>
+                            </td>
+                            <td>
+                                <div class="action-buttons">
+                                    <a th:href="@{/suivie/detail/{id}(id=${parcel.parcelId})}"
+                                       class="btn btn-outline-custom btn-sm"
+                                       title="Voir détails">
+                                        <i class="bi bi-eye"></i>
+                                    </a>
+                                    <a th:href="@{/suivie/imprimer/{id}(id=${parcel.parcelId})}"
+                                       class="btn btn-outline-custom btn-sm"
+                                       title="Imprimer">
+                                        <i class="bi bi-printer"></i>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <!-- État vide -->
+                        <tr th:if="${parcels == null or parcels.empty}">
+                            <td colspan="9">
+                                <div class="empty-state">
+                                    <i class="bi bi-inbox"></i>
+                                    <h5>Aucun colis trouvé</h5>
+                                    <p class="mb-0">Aucun colis ne correspond à vos critères de recherche.</p>
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Pagination -->
+            <div class="d-flex justify-content-between align-items-center mt-4" th:if="${parcels != null and !parcels.empty}">
+                <div class="text-muted">
+                    Affichage de <span th:text="${debut}">1</span> à <span th:text="${fin}">10</span>
+                    sur <span th:text="${total}">0</span> colis
+                </div>
+                <nav>
+                    <ul class="pagination mb-0">
+                        <li class="page-item" th:classappend="${page == 0} ? 'disabled'">
+                            <a class="page-link" th:href="@{/suivie(page=0,dateDebut=${dateDebut},dateFin=${dateFin})}">Premier</a>
+                        </li>
+                        <li class="page-item" th:classappend="${page == 0} ? 'disabled'">
+                            <a class="page-link" th:href="@{/suivie(page=${page-1},dateDebut=${dateDebut},dateFin=${dateFin})}">Précédent</a>
+                        </li>
+                        <li class="page-item" th:classappend="${page == totalPages-1} ? 'disabled'">
+                            <a class="page-link" th:href="@{/suivie(page=${page+1},dateDebut=${dateDebut},dateFin=${dateFin})}">Suivant</a>
+                        </li>
+                        <li class="page-item" th:classappend="${page == totalPages-1} ? 'disabled'">
+                            <a class="page-link" th:href="@{/suivie(page=${totalPages-1},dateDebut=${dateDebut},dateFin=${dateFin})}">Dernier</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
