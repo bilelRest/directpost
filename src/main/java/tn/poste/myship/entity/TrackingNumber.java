@@ -14,6 +14,14 @@ public class TrackingNumber {
     private Long parcelId;
     private LocalDate createdAt=LocalDate.now();
 
+    public LocalDate getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDate createdAt) {
+        this.createdAt = createdAt;
+    }
+
     public Long getParcelId() {
         return parcelId;
     }

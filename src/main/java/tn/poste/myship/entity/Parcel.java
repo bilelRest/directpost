@@ -20,6 +20,14 @@ public class Parcel {
     @OneToOne(cascade = CascadeType.ALL)
     private TrackingNumber trackingNumber;
 
+    public Long getParcelId() {
+        return parcelId;
+    }
+
+    public void setParcelId(Long parcelId) {
+        this.parcelId = parcelId;
+    }
+
     public Parcel() {
     }
 
