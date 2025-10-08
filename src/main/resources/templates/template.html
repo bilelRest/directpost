@@ -253,7 +253,7 @@
                 <span class="text-white fw-semibold" th:text="${logged}">Utilisateur</span>
             </div>
 
-            <form th:action="@{/logout}" method="post" class="d-inline">
+            <form th:action="@{#}" method="get" class="d-inline">
                 <button title="Déconnexion" type="submit" class="btn btn-outline-custom btn-sm">
                     <i class="bi bi-box-arrow-right fs-6"></i>
                 </button>
@@ -300,7 +300,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-light py-2" href="/historique">
+                        <a class="nav-link text-light py-2" href="#">
                             <i class="bi bi-clock-history me-2"></i>
                             Historique
                         </a>
@@ -320,13 +320,13 @@
             <div id="rapportsMenu" class="sub-menu ms-4 mb-2" style="display:none;">
                 <ul class="nav flex-column">
                     <li class="nav-item">
-                        <a class="nav-link text-light py-2" href="/statistiques">
+                        <a class="nav-link text-light py-2" href="#">
                             <i class="bi bi-bar-chart me-2"></i>
                             Statistiques
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-light py-2" href="/export">
+                        <a class="nav-link text-light py-2" href="#">
                             <i class="bi bi-download me-2"></i>
                             Exports
                         </a>
@@ -346,13 +346,13 @@
             <div id="adminMenu" class="sub-menu ms-4 mb-2" style="display:none;">
                 <ul class="nav flex-column">
                     <li class="nav-item">
-                        <a class="nav-link text-light py-2" href="/utilisateurs">
+                        <a class="nav-link text-light py-2" href="#">
                             <i class="bi bi-people me-2"></i>
                             Utilisateurs
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-light py-2" href="/parametres">
+                        <a class="nav-link text-light py-2" href="#">
                             <i class="bi bi-gear me-2"></i>
                             Paramètres
                         </a>
@@ -362,7 +362,7 @@
 
             <!-- Retour Accueil -->
             <li class="nav-item mt-4">
-                <a class="nav-link text-light py-3" href="/welcome">
+                <a class="nav-link text-light py-3" href="#">
                     <i class="bi bi-house-door me-3 fs-5"></i>
                     Retour Accueil
                 </a>
