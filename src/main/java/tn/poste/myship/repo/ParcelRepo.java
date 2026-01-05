@@ -1,14 +1,16 @@
 package tn.poste.myship.repo;
 
+import java.time.LocalDate;
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+
 import tn.poste.myship.entity.Parcel;
 import tn.poste.myship.entity.TrackingNumber;
-
-import java.time.LocalDate;
 
 public interface ParcelRepo extends JpaRepository< Parcel,Long> {
     Parcel findByTrackingNumber(TrackingNumber trackingNumber);
@@ -33,5 +35,7 @@ public interface ParcelRepo extends JpaRepository< Parcel,Long> {
         @Query("SELECT COALESCE(SUM(p.weight), 0) FROM Parcel p WHERE p.trackingNumber.createdAt BETWEEN :dateDebut AND :dateFin")
         Double sumWeightByDateRange(@Param("dateDebut") LocalDate dateDebut,
                                     @Param("dateFin") LocalDate dateFin);
+    @Query("SELECT p FROM Parcel p WHERE p.sender.sendTel = :tel AND p.delivered = false")
+    public List<Parcel> findBySendTelAndDeliveredFalse(Long tel);
     }
 

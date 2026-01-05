@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="fr"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{template}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=0.5">
+    <link rel="stylesheet" href="/webjars/bootstrap/5.3.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/webjars/bootstrap-icons/1.10.5/font/bootstrap-icons.css">
+    <script src="/webjars/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
+    <title>DirectPost - Accueil</title>
+    
+    <style>
+        .service-card {
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-radius: 15px;
+        }
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.175) !important;
+        }
+        .service-content {
+            position: relative;
+            z-index: 1;
+            padding: 2rem 1rem;
+        }
+        .service-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 255, 255, 0.97);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 2;
+            gap: 12px;
+            padding: 15px;
+        }
+        .service-card:hover .service-overlay {
+            opacity: 1;
+        }
+        .display-4 {
+            transition: transform 0.3s ease;
+        }
+        .service-card:hover .display-4 {
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body>
+    <div layout:fragment="content1">
+        <div class="bg-primary text-white py-5 mb-5 shadow-sm">
+            <div class="container text-center text-md-start">
+                <h1 class="display-4 fw-bold mb-3">DirectPost</h1>
+                <p class="lead">Bienvenue à La Poste Tunisienne - Votre solution complète de services postaux</p>
+            </div>
+        </div>
+
+        <div class="container mb-5">
+            <div class="row g-4">
+                
+                <div class="col-md-6 col-lg-3">
+                    <div class="card h-100 shadow-sm border-0 service-card">
+                        <div class="card-body text-center service-content">
+                            <i class="bi bi-truck display-4 text-primary mb-3"></i>
+                            <h5 class="card-title fw-bold">EMS National</h5>
+                            <p class="card-text text-muted small">Expédition rapide et sécurisée partout en Tunisie</p>
+                            <div class="service-overlay">
+                                <a th:href="@{/passenger/national}" class="btn btn-primary w-75 shadow-sm">Dépôt Passager</a>
+                                <a th:href="@{/subscribed}" class="btn btn-outline-primary w-75">Dépôt Abonné</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-3">
+                    <div class="card h-100 shadow-sm border-0 service-card">
+                        <div class="card-body text-center service-content">
+                            <i class="bi bi-airplane-engines display-4 text-info mb-3"></i>
+                            <h5 class="card-title fw-bold">EMS International</h5>
+                            <p class="card-text text-muted small">Vos colis livrés dans le monde entier en un temps record</p>
+                            <div class="service-overlay">
+                                <a href="#" class="btn btn-info text-white w-75 shadow-sm">Dépôt Passager</a>
+                                <a href="#" class="btn btn-outline-info w-75">Dépôt Abonné</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+               <div class="col-md-6 col-lg-3">
+    <div class="card h-100 shadow-sm border-0 service-card">
+        <div class="card-body text-center service-content">
+            <i class="bi bi-shield-check display-4 text-success mb-3"></i>
+            <h5 class="card-title fw-bold">RPPI</h5>
+            <p class="card-text text-muted small">Service Premium : Envois personnalisés et sécurisés à l'international</p>
+            <div class="service-overlay">
+                <a href="#" class="btn btn-success w-75 shadow-sm">Dépôt Passager</a>
+                <a href="#" class="btn btn-outline-success w-75">Dépôt Abonné</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+                <div class="col-md-6 col-lg-3">
+                    <div class="card h-100 shadow-sm border-0 service-card">
+                        <div class="card-body text-center service-content">
+                            <i class="bi bi-flower1 display-4 text-danger mb-3"></i>
+                            <h5 class="card-title fw-bold">Fleurs de Poste</h5>
+                            <p class="card-text text-muted small">Envoyez des émotions avec nos bouquets à l'international</p>
+                            <div class="service-overlay">
+                                <a href="#" class="btn btn-danger w-75 shadow-sm">Dépôt Passager</a>
+                                <a href="#" class="btn btn-outline-danger w-75">Dépôt Abonné</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,6 +1,12 @@
 package tn.poste.myship.entity;
 
-import jakarta.persistence.*;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 
 @Entity
 public class Parcel {
@@ -13,10 +19,16 @@ public class Parcel {
     private Double lenght;
     private Double price;
     private Double weight;
-    @OneToOne(cascade = CascadeType.ALL)
+    private Boolean delivered = false;
+   // PLUSIEURS colis peuvent aller vers UN SEUL destinataire
+    @ManyToOne 
     private Receiver receiver;
-    @OneToOne(cascade = CascadeType.ALL)
+
+    // PLUSIEURS colis peuvent être envoyés par UN SEUL expéditeur
+    @ManyToOne
     private Sender sender;
+
+    // UN colis a UN SEUL numéro de suivi (Ici OneToOne est correct)
     @OneToOne(cascade = CascadeType.ALL)
     private TrackingNumber trackingNumber;
 
@@ -31,7 +43,8 @@ public class Parcel {
     public Parcel() {
     }
 
-    public Parcel(Double width, Double height, Double lenght, Double price, Double weight, Receiver receiver, Sender sender, TrackingNumber trackingNumber) {
+    public Parcel(Double width, Double height, Double lenght, Double price, Double weight, Receiver receiver, Sender sender, TrackingNumber trackingNumber,Boolean delivered) {
+         this.delivered=delivered;
         this.width = width;
         this.height = height;
         this.lenght = lenght;
@@ -104,5 +117,13 @@ public class Parcel {
 
     public void setTrackingNumber(TrackingNumber trackingNumber) {
         this.trackingNumber = trackingNumber;
+    }
+
+    public Boolean getDelivered() {
+        return delivered;
+    }
+
+    public void setDelivered(Boolean delivered) {
+        this.delivered = delivered;
     }
 }
