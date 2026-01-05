@@ -1,9 +1,4 @@
-// Source - https://stackoverflow.com/a
-// Posted by Santanu, modified by community. See post 'Timeline' for change history
-// Retrieved 2026-01-05, License - CC BY-SA 4.0
-
 FROM openjdk:17-jdk-slim
-
 WORKDIR /app
 
 COPY src ./src
