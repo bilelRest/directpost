@@ -11,158 +11,122 @@
 <body>
 <div layout:fragment="content1">
     <div class="container-fluid mb-0 p-0">
-   <form autocomplete="off" id="deliveryForm" class="w-100">
-        
-        <div class="card shadow-sm border-0 mb-2 border-start border-primary border-4">
-            <div class="card-header border-0 py-1 bg-primary d-flex align-items-center">
-                <h6 class="mb-0 text-light fw-bold" style="font-size: 0.8rem;"><i class="bi bi-person-up me-1"></i>EXPÉDITEUR PASSAGER</h6>
+  <form autocomplete="off" id="deliveryForm" class="w-100">
+    <div class="card shadow-sm border-0 mb-2 border-start border-primary border-4">
+        <div class="card-header border-0 py-1 bg-primary d-flex align-items-center">
+            <h6 class="mb-0 text-light fw-bold" style="font-size: 0.8rem;"><i class="bi bi-person-up me-1"></i>EXPÉDITEUR</h6>
+        </div>
+        <div class="card-body py-2">
+            <div class="row g-1">
+                <div class="col-md-2"><input id="senderTel" name="sender.sendTel" type="tel" class="form-control form-control-sm" placeholder="Téléphone" onchange="checkclient()"></div>
+                <div class="col-md-3"><input id="senderName" name="sender.sendName" type="text" class="form-control form-control-sm" placeholder="Nom Complet"></div>
+                <div class="col-md-4"><input id="senderAdress" name="sender.adress" type="text" class="form-control form-control-sm" placeholder="Adresse"></div>
+                <div class="col-md-2"><input id="senderVille" name="sender.ville" type="text" class="form-control form-control-sm" placeholder="Ville"></div>
+                <div class="col-md-1"><input value="Tunisie" class="form-control form-control-sm bg-light" readonly></div>
             </div>
-            <div class="card-body py-2">
-                <div class="row g-1 align-items-end">
-                    <div class="col-md-1">
-                        <label class="small fw-bold text-muted mb-0" style="font-size: 0.6rem;">TÉLÉPHONE</label>
-                        <input onchange="checkclient()" id="senderTel" name="sender.sendTel" type="tel" class="form-control form-control-sm border-primary border-opacity-25" placeholder="5x..." required />
+        </div>
+    </div>
+
+    <div class="card shadow-sm border-0 mb-2 border-start border-warning border-4">
+        <div class="card-header border-0 py-1 bg-warning d-flex align-items-center">
+            <h6 class="mb-0 text-dark fw-bold" style="font-size: 0.8rem;"><i class="bi bi-person-down me-1 text-success"></i>DESTINATAIRE</h6>
+        </div>
+        <div class="card-body py-2">
+            <div class="row g-1">
+                <div class="col-md-1">
+                    <select id="recCountry" name="receiver.country" class="form-select form-select-sm" onchange="toggleCountryLogic()">
+                        <option value="Tunisie" selected>Tunisie</option>
+                        <option value="Autre">Autre</option>
+                    </select>
+                </div>
+                <div class="col-md-2"><input id="receiverName" name="receiver.recName" type="text" class="form-control form-control-sm" placeholder="Nom" required></div>
+                <div class="col-md-3"><input id="receiverAdress" name="receiver.adress" type="text" class="form-control form-control-sm" placeholder="Adresse" required></div>
+                <div class="col-md-2"><input id="receiverVille" name="receiver.ville" type="text" class="form-control form-control-sm" placeholder="Ville" required></div>
+                <div class="col-md-2"><input id="receiverTel" name="receiver.recTel" type="tel" class="form-control form-control-sm" placeholder="Téléphone" required></div>
+                <div class="col-md-2"><input id="receiverPostal" name="receiver.postalCode" type="text" class="form-control form-control-sm" placeholder="CP"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card border-0 shadow-sm bg-light mb-2">
+        <div class="card-body py-2">
+            <div class="row g-2 align-items-center">
+                <div class="col-md-3">
+                    <div class="btn-group w-100 shadow-sm">
+                        <input type="radio" class="btn-check" name="btnradio" id="btncheck1" value="EMS National" checked onchange="toggleExtraFields()">
+                        <label class="btn btn-outline-primary btn-sm fw-bold" id="labelEmsNat" for="btncheck1">EMS NAT</label>
+                        
+                        <input type="radio" class="btn-check" name="btnradio" id="btncheck3" value="RPPI" onchange="toggleExtraFields()">
+                        <label class="btn btn-outline-warning btn-sm fw-bold text-dark d-none" id="labelRppi" for="btncheck3">RPPI</label>
+                        
+                        <input type="radio" class="btn-check" name="btnradio" id="btncheck2" value="EMS International" onchange="toggleExtraFields()">
+                        <label class="btn btn-outline-info btn-sm fw-bold d-none" id="labelEmsInt" for="btncheck2">EMS INT</label>
+                        
+                        <input type="radio" class="btn-check" name="btnradio" id="btncheck4" value="Bouquet de fleurs" onchange="toggleExtraFields()">
+                        <label class="btn btn-outline-success btn-sm fw-bold" id="labelFleurs" for="btncheck4">FLEURS</label>
                     </div>
-                    <div class="col-md-2">
-                        <label class="small fw-bold text-muted mb-0" style="font-size: 0.6rem;">NOM COMPLET</label>
-                        <input id="senderName" name="sender.sendName" type="text" class="form-control form-control-sm border-primary border-opacity-25" required />
+                </div>
+
+                <div class="col-md-2 d-none" id="typeappelofre">
+                    <select id="itemTypeoffre" name="typeOffre" class="form-select form-select-sm border-primary">
+                        <option value="Normal">Normal</option>
+                        <option value="Appel">Appel d'offre</option>
+                    </select>
+                </div>
+                <div class="col-md-2 d-none" id="typeContainer">
+                    <select id="itemType" name="typeItem" class="form-select form-select-sm border-info" onchange="toggleExtraFields()">
+                        <option value="Document">Document</option>
+                        <option value="Marchandise">Marchandise</option>
+                    </select>
+                </div>
+
+                <div id="dimensionsContainer" class="col-md-2 d-none">
+                    <div class="input-group input-group-sm">
+                        <input id="longeur" name="dimL" type="number" class="form-control px-1" placeholder="L" oninput="calculerprix()">
+                        <input id="largeur" name="dimW" type="number" class="form-control px-1" placeholder="W" oninput="calculerprix()">
+                        <input id="hauteur" name="dimH" type="number" class="form-control px-1" placeholder="H" oninput="calculerprix()">
                     </div>
-                    <div class="col-md-2">
-                        <label class="small fw-bold text-muted mb-0" style="font-size: 0.6rem;">RAISON SOCIALE</label>
-                        <input id="sendSocialReason" name="sender.sendSocialReason" type="text" class="form-control form-control-sm border-primary border-opacity-25" />
+                </div>
+
+                <div class="col-md-1">
+                    <div class="input-group input-group-sm">
+                        <input oninput="calculerprix()" type="number" step="0.1" name="weight" id="parcelWeight" class="form-control border-primary fw-bold" placeholder="KG">
+                        <span class="input-group-text bg-primary text-white p-1">KG</span>
                     </div>
-                    <div class="col-md-3">
-                        <label class="small fw-bold text-muted mb-0" style="font-size: 0.6rem;">ADRESSE</label>
-                        <input id="senderAdress" name="sender.adress" type="text" class="form-control form-control-sm border-primary border-opacity-25" required />
-                    </div>
-                    <div class="col-md-2">
-                        <label class="small fw-bold text-muted mb-0" style="font-size: 0.6rem;">VILLE</label>
-                        <input id="senderVille" name="sender.ville" type="text" class="form-control form-control-sm border-primary border-opacity-25" required />
-                    </div>
-                    <div class="col-md-1">
-                        <label class="small fw-bold text-muted mb-0" style="font-size: 0.6rem;">CP</label>
-                        <input id="senderPostal" name="sender.postalCode" type="text" class="form-control form-control-sm border-primary border-opacity-25" />
-                    </div>
-                    <div class="col-md-1">
-                        <label class="small fw-bold text-muted mb-0" style="font-size: 0.6rem;">PAYS</label>
-                        <input value="Tunisie" id="senderCountry" name="sender.country" type="text" class="form-control form-control-sm bg-light border-0" readonly />
-                    </div>
+                </div>
+
+                <div id="btnFactureContainer" class="col-md-2 d-none">
+                    <button type="button" class="btn btn-outline-info btn-sm w-100 fw-bold shadow-sm" data-bs-toggle="modal" data-bs-target="#factureModal">
+                        <i class="bi bi-receipt"></i> FACTURE
+                    </button>
+                </div>
+
+                <div class="col-md-2 d-flex align-items-center justify-content-end">
+                    <span id="pricezone" class="fw-bold text-primary me-2">0.000 DT</span>
+                    <button type="button" id="btnValider" onclick="validerEtImprimer()" class="btn btn-success btn-sm px-3 fw-bold shadow-sm">VALIDER</button>
                 </div>
             </div>
         </div>
+    </div>
+</form>
 
-        <div class="card shadow-sm border-0 mb-2 border-start border-warning border-4">
-            <div class="card-header border-0 py-1 bg-warning d-flex align-items-center">
-                <h6 class="mb-0 text-dark fw-bold" style="font-size: 0.8rem;"><i class="bi bi-person-down me-1 text-success"></i>DESTINATAIRE</h6>
+<div class="modal fade" id="factureModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-info text-white p-2">
+                <h6 class="modal-title">Saisie de la Facture</h6>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
             </div>
-            <div class="card-body py-2">
-                <div class="row g-1 align-items-end">
-                    <div class="col-md-1">
-                        <label class="small fw-bold text-muted mb-0" style="font-size: 0.6rem;">PAYS</label>
-                        <select id="recCountry" name="receiver.country" class="form-select form-select-sm bg-light border-warning border-opacity-50" onchange="toggleCountryLogic()">
-                            <option value="Tunisie" selected>Tunisie</option>
-                            <option value="Autre">Autre</option>
-                        </select>
-                    </div>
-                    <div class="col-md-2">
-                        <label class="small fw-bold text-muted mb-0" style="font-size: 0.6rem;">NOM COMPLET</label>
-                        <input id="receiverName" name="receiver.recName" type="text" class="form-control form-control-sm border-warning border-opacity-50" required />
-                    </div>
-                    <div class="col-md-2">
-                        <label class="small fw-bold text-muted mb-0" style="font-size: 0.6rem;">RAISON SOCIALE</label>
-                        <input id="recSocialraison" name="receiver.recSocialraison" type="text" class="form-control form-control-sm border-warning border-opacity-50" />
-                    </div>
-                    <div class="col-md-3">
-                        <label class="small fw-bold text-muted mb-0" style="font-size: 0.6rem;">ADRESSE</label>
-                        <input id="receiverAdress" name="receiver.adress" type="text" class="form-control form-control-sm border-warning border-opacity-50" required />
-                    </div>
-                    <div class="col-md-2">
-                        <label class="small fw-bold text-muted mb-0" style="font-size: 0.6rem;">VILLE</label>
-                        <input id="receiverVille" name="receiver.ville" type="text" class="form-control form-control-sm border-warning border-opacity-50" required />
-                    </div>
-                    <div class="col-md-1">
-                        <label class="small fw-bold text-muted mb-0" style="font-size: 0.6rem;">CP</label>
-                        <input id="receiverPostal" name="receiver.postalCode" type="text" class="form-control form-control-sm border-warning border-opacity-50" />
-                    </div>
-                    <div class="col-md-1">
-                        <label class="small fw-bold text-muted mb-0" style="font-size: 0.6rem;">TÉLÉPHONE</label>
-                        <input id="receiverTel" name="receiver.recTel" type="tel" class="form-control form-control-sm border-warning border-opacity-50" required />
-                    </div>
-                </div>
+            <div class="modal-body">
+                <textarea id="factureDetail" class="form-control mb-2" rows="3" placeholder="Description des articles..."></textarea>
+                <input type="number" id="factureVal" class="form-control" placeholder="Valeur estimée (DT)">
+            </div>
+            <div class="modal-footer p-1">
+                <button type="button" class="btn btn-primary btn-sm" data-bs-dismiss="modal">Enregistrer</button>
             </div>
         </div>
-
-        <div class="card border-0 shadow-sm bg-light mb-2">
-            <div class="card-body py-2">
-                <div class="row g-2 align-items-center">
-                    <div class="col-md-5">
-                        <div class="btn-group w-100 shadow-sm">
-                            <input type="radio" class="btn-check" name="btnradio" id="btncheck1" value="EMS National" checked onchange="toggleExtraFields()">
-                            <label class="btn btn-outline-primary btn-sm fw-bold" id="labelEmsNat" for="btncheck1">EMS NAT</label>
-                            
-                            <input type="radio" class="btn-check" name="btnradio" id="btncheck2" value="EMS International" onchange="toggleExtraFields()">
-                            <label class="btn btn-outline-info btn-sm fw-bold d-none" id="labelEmsInt" for="btncheck2">EMS INT</label>
-                            
-                            <input type="radio" class="btn-check" name="btnradio" id="btncheck3" value="RPPI" onchange="toggleExtraFields()">
-                            <label class="btn btn-outline-warning btn-sm fw-bold text-dark d-none" id="labelRppi" for="btncheck3">RPPI</label>
-                            
-                            <input type="radio" class="btn-check" name="btnradio" id="btncheck4" value="Bouquet de fleurs" onchange="toggleExtraFields()">
-                            <label class="btn btn-outline-success btn-sm fw-bold" id="labelFleurs" for="btncheck4">FLEURS</label>
-                        </div>
-                    </div>
-
-                    <div class="col-md-2 d-none" id="typeappelofre">
-                        <select id="itemTypeoffre" class="form-select form-select-sm border-primary shadow-none">
-                            <option value="appel">Normal</option>
-                            <option value="offre">Appel d'offre</option>
-                        </select>
-                    </div>
-
-                    <div class="col-md-2 d-none" id="typeContainer">
-                        <select id="itemType" class="form-select form-select-sm border-info shadow-none" onchange="toggleExtraFields()">
-                            <option value="Document">Document</option>
-                            <option value="Marchandise">Marchandise</option>
-                        </select>
-                    </div>
-                    <div class="col-md-1 d-none" id="dimensionsContainer">
-                        <div class="d-flex gap-1">
-                         <label class="small fw-bold text-muted d-block" style="font-size: 0.6rem;">Longr</label>
-
-                            <input id="longeur" type="number" class="form-control form-control-sm" placeholder="L" oninput="calculerprix()">
-                                                     <label class="small fw-bold text-muted d-block" style="font-size: 0.6rem;">larg</label>
-
-                            <input id="largeur" type="number" class="form-control form-control-sm" placeholder="W" oninput="calculerprix()">
-                                                     <label class="small fw-bold text-muted d-block" style="font-size: 0.6rem;">Haut</label>
-
-                            <input id="hauteur" type="number" class="form-control form-control-sm" placeholder="H" oninput="calculerprix()">
-                        </div>
-                    </div>
-
-                    <div class="col-md-2">
-                        <div class="input-group input-group-sm">
-                            <input oninput="calculerprix()" type="number" step="0.1" name="weight" id="parcelWeight" class="form-control border-primary fw-bold" placeholder="Poids KG">
-                            <span class="input-group-text bg-primary text-white border-primary">KG</span>
-                        </div>
-                    </div>
-
-                    <div class="col-md-2 d-flex align-items-center justify-content-end">
-                        <span id="pricezone" class="fw-bold fs-5 text-primary me-2">0.000 DT</span>
-                       <button type="button" id="btnValider" onclick="validerEtImprimer()" class="btn btn-success btn-sm px-3 fw-bold shadow-sm">
-    VALIDER
-</button>
-                    </div>
-                </div>
-
-                <div class="row g-2 mt-2 d-none" id="extraFieldsRow">
-                    <div class="col-md-6 d-none" id="invoiceMessageContainer">
-                        <label class="small fw-bold text-muted" style="font-size: 0.6rem;">DONNÉES FACTURE</label>
-                        <input type="text" class="form-control form-control-sm border-info" placeholder="Détails du contenu...">
-                    </div>
-                    
-                </div>
-            </div>
-        </div>
-    </form>
+    </div>
+</div>
         <div class="row mt-5" id="sessionContainer" style="display:none;">
             <div class="col-12">
                 <div class="card shadow border-0">
@@ -231,12 +195,17 @@
 /**
  * Fonction principale : Enregistre, Imprime et Réinitialise le bloc Destinataire
  */
+/**
+ * Fonction principale : Enregistre, Imprime et Réinitialise
+ */
 async function validerEtImprimer() {
     const weightInput = document.getElementById('parcelWeight');
     const weight = parseFloat(weightInput.value) || 0;
+    const serviceActif = document.querySelector('input[name="btnradio"]:checked').value;
 
-    if (weight <= 0 || weight > 30) {
-        alert("Veuillez entrer un poids valide pour le colis (max 30kg)");
+    // Validation du poids (sauf pour les fleurs qui peuvent être à 0)
+    if (serviceActif !== 'Bouquet de fleurs' && (weight <= 0 || weight > 30)) {
+        alert("Veuillez entrer un poids valide (max 30kg)");
         weightInput.focus();
         return;
     }
@@ -244,20 +213,22 @@ async function validerEtImprimer() {
     const form = document.getElementById('deliveryForm');
     const formData = new FormData(form);
     
-    // --- AJOUTS SÉCURISÉS ---
-    const serviceActif = document.querySelector('input[name="btnradio"]:checked').value;
+    // --- RÉCUPÉRATION DES DONNÉES DU MODAL FACTURE ---
+    const factDetail = document.getElementById('factureDetail');
+    const factVal = document.getElementById('factureVal');
+    if (factDetail) formData.append('invoiceDetails', factDetail.value);
+    if (factVal) formData.append('invoiceValue', factVal.value);
+
+    // --- AJOUTS SÉCURISÉS DES SERVICES ---
     formData.append('service', serviceActif);
-    
-    // On récupère le type (Document/Marchandise) si on est en International
-    if (serviceActif === 'EMS International' || serviceActif === 'RPPI') {
-        formData.append('itemType', document.getElementById('itemType').value);
-    }
-    
-    // On ajoute le mode de paiement
     formData.append('paymentMode', 'Espèces');
-    // ------------------------
+    
+    // Ajout manuel du prix calculé pour le backend
+    const priceZone = document.getElementById('pricezone').innerText;
+    formData.append('calculatedPrice', priceZone.replace(' DT', ''));
 
     try {
+        console.log("Envoi en cours...");
         const response = await fetch('/passenger/reserve', { 
             method: 'POST', 
             body: formData 
@@ -267,49 +238,38 @@ async function validerEtImprimer() {
 
         const trackingId = await response.text(); 
 
-        // Fermeture de la Modal
-        const modalElement = document.getElementById('paymentModal');
-        if (modalElement) {
-            const modalInstance = bootstrap.Modal.getOrCreateInstance(modalElement);
-            modalInstance.hide();
-        }
-
+        // 1. Notifications et Étiquette
         genererVueEtiquette(trackingId);
         showNotification(`Colis ${trackingId} enregistré avec succès !`, 'success');
 
-        // --- RÉINITIALISATION ÉTENDUE ---
+        // 2. RÉINITIALISATION DES CHAMPS DESTINATAIRE UNIQUEMENT
         const fieldsToClear = [
             'receiverName', 'recSocialraison', 'receiverAdress', 
             'receiverTel', 'receiverVille', 'receiverPostal', 
-            'parcelWeight', 'longeur', 'largeur', 'hauteur'
+            'parcelWeight', 'longeur', 'largeur', 'hauteur',
+            'factureDetail', 'factureVal' // On vide aussi le modal
         ];
 
         fieldsToClear.forEach(id => {
             const field = document.getElementById(id);
-            if (field) {
-                field.value = ""; 
-                field.classList.remove('is-valid', 'is-invalid');
-            }
+            if (field) field.value = ""; 
         });
 
-        // On vide aussi le champ description/facture
-        const invoiceField = document.querySelector('#invoiceMessageContainer input');
-        if (invoiceField) invoiceField.value = "";
+        if (document.getElementById('pricezone')) {
+            document.getElementById('pricezone').innerText = "0.000 DT";
+        }
 
-        const priceZone = document.getElementById('pricezone');
-        if (priceZone) priceZone.innerText = "0.000 DT";
-
-        // Mise à jour de la liste
+        // 3. MISE À JOUR DU TABLEAU DE SESSION (LISTE DES COLIS EN BAS)
         const senderTel = document.getElementById('senderTel').value;
         if (senderTel) loadClientParcels(senderTel);
 
-        // Focus sur le téléphone du destinataire pour le colis suivant
+        // 4. Focus sur le téléphone du destinataire pour le suivant
         setTimeout(() => {
             document.getElementById('receiverTel').focus();
         }, 500);
 
     } catch (err) {
-        console.error("Erreur de processus:", err);
+        console.error("Erreur critique:", err);
         showNotification("Erreur lors de l'enregistrement : " + err.message, 'danger');
     }
 }
@@ -318,119 +278,101 @@ function toggleCountryLogic() {
     const country = document.getElementById('recCountry').value;
     const isTunisia = (country === 'Tunisie');
 
-    // Éléments des labels (boutons radio)
+    // 1. Gestion de la visibilité des boutons radio
     const lblNat = document.getElementById('labelEmsNat');
     const lblFleurs = document.getElementById('labelFleurs');
     const lblInt = document.getElementById('labelEmsInt');
     const lblRppi = document.getElementById('labelRppi');
 
     if (isTunisia) {
-        // Afficher National / Fleurs
-        lblNat.classList.remove('d-none');
-        lblFleurs.classList.remove('d-none');
-        // Cacher International
-        lblInt.classList.add('d-none');
-        lblRppi.classList.add('d-none');
-        // Cocher National par défaut
-        document.getElementById('btncheck1').checked = true;
+        // Afficher options Nationales
+        if(lblNat) lblNat.classList.remove('d-none');
+        if(lblFleurs) lblFleurs.classList.remove('d-none');
+        // Cacher options Internationales
+        if(lblInt) lblInt.classList.add('d-none');
+        if(lblRppi) lblRppi.classList.add('d-none');
+
+        // COCHÉ PAR DÉFAUT : EMS National
+        const radioEmsNat = document.getElementById('btncheck1');
+        if(radioEmsNat) radioEmsNat.checked = true;
+
     } else {
-        // Cacher National / Fleurs
-        lblNat.classList.add('d-none');
-        lblFleurs.classList.add('d-none');
-        // Afficher International
-        lblInt.classList.remove('d-none');
-        lblRppi.classList.remove('d-none');
-        // Cocher International par défaut
-        document.getElementById('btncheck2').checked = true;
+        // Cacher options Nationales
+        if(lblNat) lblNat.classList.add('d-none');
+        if(lblFleurs) lblFleurs.classList.add('d-none');
+        // Afficher options Internationales
+        if(lblInt) lblInt.classList.remove('d-none');
+        if(lblRppi) lblRppi.classList.remove('d-none');
+
+        // COCHÉ PAR DÉFAUT : RPPI
+        const radioRppi = document.getElementById('btncheck3');
+        if(radioRppi) radioRppi.checked = true;
     }
     
-    // Mettre à jour les champs supplémentaires
+    // 2. Mettre à jour les champs supplémentaires (Doc/Marchandise/Dimensions)
     toggleExtraFields();
 }
-
 // Fonction de gestion des affichages de champs
 function toggleExtraFields() {
-    const service = document.querySelector('input[name="btnradio"]:checked').value;
-    const type = document.getElementById('itemType').value;
+    // 1. Récupération sécurisée des valeurs
+    const radioChecked = document.querySelector('input[name="btnradio"]:checked');
+    if (!radioChecked) return; // Sécurité si aucun bouton n'est coché
+    
+    const service = radioChecked.value;
+    const itemTypeElem = document.getElementById('itemType');
+    const type = itemTypeElem ? itemTypeElem.value : 'Document';
 
+    // 2. Récupération des conteneurs avec vérification de présence (évite l'erreur NULL)
     const typeContainer = document.getElementById('typeContainer');
-    const extraFieldsRow = document.getElementById('extraFieldsRow');
-    const dimensionsContainer = document.getElementById('dimensionsContainer');
-    const invoiceContainer = document.getElementById('invoiceMessageContainer');
-    const typenat = document.getElementById('typeappelofre');
+    const typeNat = document.getElementById('typeappelofre');
+    const dimContainer = document.getElementById('dimensionsContainer');
+    const btnFacture = document.getElementById('btnFactureContainer');
 
-    // Reset initial
-    typeContainer.classList.add('d-none');
-    typenat.classList.add('d-none');
-    extraFieldsRow.classList.add('d-none');
-    invoiceContainer.classList.add('d-none');
-    dimensionsContainer.classList.add('d-none');
+    // Fonction utilitaire interne pour masquer proprement
+    const hide = (el) => { if (el) el.classList.add('d-none'); };
+    const show = (el) => { if (el) el.classList.remove('d-none'); };
 
-    // 1. Logique EMS National (Affiche Appel d'offre)
+    // 3. Reset initial : On cache tout
+    [typeContainer, typeNat, dimContainer, btnFacture].forEach(hide);
+
+    // 4. Logique d'affichage
     if (service === 'EMS National') {
-        typenat.classList.remove('d-none');
+        show(typeNat);
     } 
-    // 2. Logique International (Affiche Doc/Marchandise)
     else if (service === 'EMS International' || service === 'RPPI') {
-        typeContainer.classList.remove('d-none');
+        show(typeContainer);
         
         if (type === 'Marchandise') {
-            extraFieldsRow.classList.remove('d-none');
-            invoiceContainer.classList.remove('d-none');
+            show(btnFacture); // Affiche le bouton pour le Modal Facture
+            
             if (service === 'RPPI') {
-                dimensionsContainer.classList.remove('d-none');
+                show(dimContainer); // Dimensions uniquement pour RPPI Marchandise
             }
         }
     }
 
-    calculerprix();
+    // Relancer le calcul du prix après changement de visibilité
+    if (typeof calculerprix === "function") {
+        calculerprix();
+    }
 }
-
 // Fonction de calcul de prix
 function calculerprix() {
-    let poids = parseFloat(document.getElementById('parcelWeight').value) || 0;
+    let weight = parseFloat(document.getElementById('parcelWeight').value) || 0;
     const service = document.querySelector('input[name="btnradio"]:checked').value;
-    const type = document.getElementById('itemType').value;
+    const itemType = document.getElementById('itemType') ? document.getElementById('itemType').value : 'Document';
     
-    // Logique Poids Volumétrique pour RPPI Marchandise
-    if (service === 'RPPI' && type === 'Marchandise') {
+    // Calcul Poids Volumétrique (RPPI Marchandise uniquement)
+    if (service === 'RPPI' && itemType === 'Marchandise') {
         const l = parseFloat(document.getElementById('longeur').value) || 0;
         const w = parseFloat(document.getElementById('largeur').value) || 0;
         const h = parseFloat(document.getElementById('hauteur').value) || 0;
         const poidsVol = (l * w * h) / 5000;
-        poids = Math.max(poids, poidsVol);
+        weight = Math.max(weight, poidsVol);
     }
 
-    // Exemple de tarifs (À ajuster selon vos besoins)
-    let prixBase = 0;
-    if (service === 'EMS National') prixBase = 7.000;
-    else if (service === 'EMS International') prixBase = 35.000;
-    else if (service === 'RPPI') prixBase = 20.000;
-    else if (service === 'Bouquet de fleurs') prixBase = 25.000;
-
-    let total = prixBase + (poids * 1.5); // Exemple de calcul simple
-    document.getElementById('pricezone').innerText = total.toFixed(3) + " DT";
-}
-
-// Lancer la logique au chargement de la page
-window.onload = toggleCountryLogic;
-
-
-function calculerprix() {
-    let poidsReel = parseFloat(document.getElementById('parcelWeight').value) || 0;
-    const service = document.querySelector('input[name="btnradio"]:checked').value;
-    const type = document.getElementById('itemType').value;
-    
-    // Logique Poids Volumétrique (RPPI Marchandise uniquement)
-    if (service === 'RPPI' && type === 'Marchandise') {
-        const l = parseFloat(document.getElementById('longeur').value) || 0;
-        const w = parseFloat(document.getElementById('largeur').value) || 0;
-        const h = parseFloat(document.getElementById('hauteur').value) || 0;
-        const poidsVol = (l * w * h) / 5000;
-        poidsReel = Math.max(poidsReel, poidsVol);
-    }
-
-    let prix = 0;
+    let price = 0;
+    // Vos tarifs personnalisés
     const tarifs = {
         'EMS National': { base: 7, kg: 1.5 },
         'EMS International': { base: 45, kg: 20 },
@@ -438,14 +380,14 @@ function calculerprix() {
         'Bouquet de fleurs': { base: 25, kg: 0 }
     };
 
-    if (poidsReel > 0 || service === 'Bouquet de fleurs') {
+    if (weight > 0 || service === 'Bouquet de fleurs') {
         const t = tarifs[service];
-        prix = t.base + (poidsReel * t.kg);
+        price = t.base + (weight * t.kg);
     }
 
-    document.getElementById('pricezone').innerText = prix.toFixed(3) + " DT";
+    const zone = document.getElementById('pricezone');
+    if (zone) zone.innerText = price.toFixed(3) + " DT";
 }
-
 
 
 function genererVueEtiquette(trackingId) {
