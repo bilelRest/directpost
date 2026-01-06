@@ -5,54 +5,54 @@
       layout:decorate="~{template}">
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=0.7" />
     <title>Dépôt Passager - National</title>
 </head>
 <body>
 <div layout:fragment="content1">
-    <div class="container my-5">
-        <div class="row mb-5">
-            <div class="col-12 text-center">
-                <div class="display-6 fw-bold text-primary mb-2">
-                    <i class="bi bi-box-seam me-2"></i>Dépôt Passager National
-                </div>
-                <p class="text-muted">Enregistrez vos envois session par session</p>
-                <hr class="w-25 mx-auto border-primary opacity-50">
-            </div>
-        </div>
-
+    <div class="container mb-0">
+        
         <form autocomplete="off" id="deliveryForm">
             <div class="row g-4">
                 <div class="col-lg-6">
                     <div class="card shadow-sm border-0 h-100">
-                        <div class="card-header bg-light border-0 py-3 d-flex justify-content-between">
-                            <h5 class="mb-0 text-dark fw-bold"><i class="bi bi-person-up me-2 text-primary"></i>Expéditeur</h5>
+                        <div class="card-header border-0 py-3 bg-primary bg-opacity-10">
+                            <h5 class="mb-0 text-primary fw-bold">
+                                <i class="bi bi-person-up me-2"></i>Expéditeur
+                            </h5>
                         </div>
                         <div class="card-body">
                             <div class="mb-3">
                                 <label class="form-label fw-semibold">Numéro de Téléphone</label>
-                                <input autocorrect="off" 
-       autocapitalize="off" 
-       spellcheck="false" autocomplete="off" onchange="checkclient()" id="senderTel" name="sender.sendTel" type="tel" class="form-control" placeholder="5x xxx xxx" required />
+                                <input onchange="checkclient()" id="senderTel" name="sender.sendTel" type="tel" class="form-control" placeholder="5x xxx xxx" required />
                             </div>
+                            
                             <div class="mb-3">
                                 <label class="form-label fw-semibold">Nom complet</label>
-                                <input autocorrect="off" 
-       autocapitalize="off" 
-       spellcheck="false" autocomplete="off" id="senderName" name="sender.sendName" type="text" class="form-control" required />
+                                <input id="senderName" name="sender.sendName" type="text" class="form-control" placeholder="Nom & Prénom" required />
                             </div>
-                            <div class="row g-2">
-                                <div class="col-md-8 mb-3">
+
+                            <div class="mb-3">
+                                <label class="form-label fw-semibold">Raison sociale (Optionnel)</label>
+                                <input id="sendSocialReason" name="sender.sendSocialReason" type="text" class="form-control" />
+                            </div>
+
+                            <div class="row g-3">
+                                <div class="col-12">
                                     <label class="form-label fw-semibold">Adresse</label>
-                                    <input autocorrect="off" 
-       autocapitalize="off" 
-       spellcheck="false" autocomplete="off" id="senderAdress" name="sender.adress" type="text" class="form-control" required />
+                                    <input id="senderAdress" name="sender.adress" type="text" class="form-control" placeholder="Rue, Immeuble, Appt" required />
                                 </div>
-                                <div class="col-md-4 mb-3">
+                                <div class="col-md-6">
+                                    <label class="form-label fw-semibold">Ville</label>
+                                    <input id="senderVille" name="sender.ville" type="text" class="form-control" required />
+                                </div>
+                                <div class="col-md-6">
                                     <label class="form-label fw-semibold">Code Postal</label>
-                                    <input autocorrect="off" 
-       autocapitalize="off" 
-       spellcheck="false" autocomplete="off" id="senderPostal" name="sender.postalCode" type="text" class="form-control" />
+                                    <input id="senderPostal" name="sender.postalCode" type="text" class="form-control" />
+                                </div>
+                                <div class="col-12">
+                                    <label class="form-label fw-semibold">Pays</label>
+                                    <input value="Tunisie" id="senderCountry" name="sender.country" type="text" class="form-control bg-light" readonly />
                                 </div>
                             </div>
                         </div>
@@ -61,55 +61,108 @@
 
                 <div class="col-lg-6">
                     <div class="card shadow-sm border-0 h-100">
-                        <div class="card-header bg-light border-0 py-3">
-                            <h5 class="mb-0 text-dark fw-bold"><i class="bi bi-person-down me-2 text-success"></i>Destinataire</h5>
+                        <div class="card-header border-0 py-3 bg-warning bg-opacity-10">
+                            <h5 class="mb-0 text-warning fw-bold">
+                                <i class="bi bi-person-down me-2 text-success"></i>Destinataire
+                            </h5>
                         </div>
                         <div class="card-body">
-                            <div class="mb-3">
-                                <label class="form-label fw-semibold">Numéro de Téléphone</label>
-                                <input autocorrect="off" 
-       autocapitalize="off" 
-       spellcheck="false" autocomplete="off" id="receiverTel" onchange="checkreceiver()" name="receiver.recTel" type="tel" class="form-control" placeholder="9x xxx xxx" required />
-                            </div>
+                           
+
                             <div class="mb-3">
                                 <label class="form-label fw-semibold">Nom complet</label>
-                                <input autocorrect="off" 
-       autocapitalize="off" 
-       spellcheck="false" autocomplete="off" id="receiverName" name="receiver.recName" type="text" class="form-control" required />
+                                <input id="receiverName" name="receiver.recName" type="text" class="form-control" placeholder="Nom & Prénom" required />
                             </div>
-                            <div class="row g-2">
-                                <div class="col-md-8 mb-3">
+ 
+                            <div class="mb-3">
+                                <label class="form-label fw-semibold">Raison sociale (Optionnel)</label>
+                                <input id="recSocialraison" name="receiver.recSocialraison" type="text" class="form-control" />
+                            </div>
+
+                            <div class="row g-3">
+                                <div class="col-12">
                                     <label class="form-label fw-semibold">Adresse</label>
-                                    <input autocorrect="off" 
-       autocapitalize="off" 
-       spellcheck="false" autocomplete="off" id="receiverAdress" name="receiver.adress" type="text" class="form-control" required />
+                                    <input id="receiverAdress" name="receiver.adress" type="text" class="form-control" placeholder="Rue, Immeuble, Appt" required />
                                 </div>
-                                <div class="col-md-4 mb-3">
+                                <div class="mb-3">
+                                <label class="form-label fw-semibold">Numéro de Téléphone</label>
+                                <input id="receiverTel" name="receiver.recTel" type="tel" class="form-control" placeholder="9x xxx xxx" required />
+                            </div>
+                                <div class="col-md-6">
+                                    <label class="form-label fw-semibold">Ville</label>
+                                    <input id="receiverVille" name="receiver.ville" type="text" class="form-control" required />
+                                </div>
+                                <div class="col-md-6">
                                     <label class="form-label fw-semibold">Code Postal</label>
-                                    <input autocorrect="off" 
-       autocapitalize="off" 
-       spellcheck="false" autocomplete="off" id="receiverPostal" name="receiver.postalCode" type="text" class="form-control" />
+                                    <input id="receiverPostal" name="receiver.postalCode" type="text" class="form-control" />
+                                </div>
+                                <div class="col-12">
+                                    <label class="form-label fw-semibold">Pays</label>
+                                    <select value="Tunisie" id="recCountry" name="receiver.country"  class="form-control bg-light"  >
+                                    <option value="Tunisie" selected>Tunisie</option>
+                                    <option value="Autre">Autre</option>
+                                    </select>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+               <div class="col-12">
+       <div class="col-12 mt-4">
+   <div class="col-12 mt-3">
+    <div class="row g-2">
+        <div class="col-6 col-md-3">
+            <input type="radio" class="btn-check" name="btnradio" id="btncheck1" value="EMS National" checked>
+            <label class="btn btn-outline-primary compact-card shadow-none" for="btncheck1">
+                <i class="bi bi-truck fs-4 mb-1"></i>
+                <span class="text-label">EMS NATIONAL</span>
+            </label>
+        </div>
+
+        
+
+        <div class="col-6 col-md-3">
+            <input type="radio" class="btn-check" name="btnradio" id="btncheck3" value="RPPI">
+            <label class="btn btn-outline-warning compact-card shadow-none" for="btncheck3">
+                <i class="bi bi-envelope-check fs-4 mb-1"></i>
+                <span class="text-label">RPP INTERNATIONAL</span>
+            </label>
+        </div>
+<div class="col-6 col-md-3">
+            <input type="radio" class="btn-check" name="btnradio" id="btncheck2" value="EMS International">
+            <label class="btn btn-outline-info compact-card shadow-none" for="btncheck2">
+                <i class="bi bi-globe-americas fs-4 mb-1"></i>
+                <span class="text-label">EMS INTERNATIONAL</span>
+            </label>
+        </div>
+        <div class="col-6 col-md-3">
+            <input type="radio" class="btn-check" name="btnradio" id="btncheck4" value="Bouquet de fleurs">
+            <label class="btn btn-outline-success compact-card shadow-none" for="btncheck4">
+                <i class="bi bi-flower1 fs-4 mb-1"></i>
+                <span class="text-label">FLEURS DE POSTE</span>
+            </label>
+        </div>
+    </div>
+</div>
 
                 <div class="col-12">
-                    <div class="card border-primary shadow-sm" style="border-style: dashed; border-width: 2px;">
+                    <div class="card border-primary shadow-sm" style="border-style: dashed; border-width: 2px; background-color: #f8faff;">
                         <div class="card-body py-4">
-                            <div class="row align-items-center">
+                            <div class="row align-items-center g-3">
                                 <div class="col-md-4">
-                                    <h5 class="mb-0 fw-bold"><i class="bi bi-weight me-2"></i>Poids du colis (KG)</h5>
+                                    <h5 class="mb-0 fw-bold"><i class="bi bi-weight me-2 text-info"></i>Poids du colis (KG)</h5>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="input-group">
-                                        <input autocomplete="off" oninput="calculerprix()" type="number" step="0.01" id="parcelWeight" name="weight" class="form-control form-control-lg" placeholder="0.00" required>
-                                        <span class="input-group-text fw-bold bg-light">KG</span>
+                                        <input oninput="calculerprix()" type="number" step="0.01" id="parcelWeight" name="weight" class="form-control form-control-lg border-primary" placeholder="0.00" required>
+                                        <span class="input-group-text fw-bold bg-info text-white">KG</span>
                                     </div>
                                 </div>
-                                <div class="col-md-4 text-center">
-                                    <h5 id="pricezone" class="mb-0 text-primary fw-bold"></h5>
+                                <div class="col-md-4 d-flex align-items-center justify-content-between">
+                                    <h5 id="pricezone" class="mb-0 text-primary fw-bold fs-4"></h5>
+                                    <button type="button" class="btn btn-success btn-lg px-4 shadow" data-bs-toggle="modal" data-bs-target="#paymentModal">
+                                        <i class="bi bi-check-circle me-2"></i>Valider
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -117,13 +170,10 @@
                 </div>
             </div>
 
-            <div class="row mt-5">
+            <div class="row mt-4">
                 <div class="col-12 text-center">
-                    <button type="button" class="btn btn-outline-secondary btn-lg px-4 me-3" onclick="document.getElementById('deliveryForm').reset(); document.getElementById('pricezone').innerText=''">
-                        <i class="bi bi-arrow-counterclockwise me-2"></i>Réinitialiser
-                    </button>
-                    <button type="button" class="btn btn-primary btn-lg px-5 shadow" data-bs-toggle="modal" data-bs-target="#paymentModal">
-                        <i class="bi bi-check-circle me-2"></i>Valider ce colis
+                    <button type="button" class="btn btn-outline-secondary px-4" onclick="document.getElementById('deliveryForm').reset(); document.getElementById('pricezone').innerText=''">
+                        <i class="bi bi-arrow-counterclockwise me-2"></i>Réinitialiser le formulaire
                     </button>
                 </div>
             </div>
@@ -137,27 +187,29 @@
                         <span class="badge bg-primary px-3 py-2 fs-6" id="colisCount">0 Colis</span>
                     </div>
                     <div class="card-body p-0">
-                        <table class="table table-hover align-middle mb-0" id="sessionTable">
-                            <thead class="table-light">
-                                <tr>
-                                    <th class="ps-4">N° Suivi</th>
-                                    <th>Destinataire</th>
-                                    <th>Poids</th>
-                                    <th>Mode</th>
-                                    <th>Prix</th>
-                                    <th class="text-end pe-4">Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                </tbody>
-                            <tfoot class="table-light fw-bold">
-                                <tr>
-                                    <td colspan="4" class="text-end ps-4">TOTAL SESSION :</td>
-                                    <td id="totalSession" class="text-primary">0.000 DT</td>
-                                    <td></td>
-                                </tr>
-                            </tfoot>
-                        </table>
+                        <div class="table-responsive">
+                            <table class="table table-hover align-middle mb-0" id="sessionTable">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th class="ps-4">N° Suivi</th>
+                                        <th>Destinataire</th>
+                                        <th>Poids</th>
+                                        <th>Mode</th>
+                                        <th>Prix</th>
+                                        <th class="text-end pe-4">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    </tbody>
+                                <tfoot class="table-light fw-bold">
+                                    <tr>
+                                        <td colspan="4" class="text-end ps-4">TOTAL SESSION :</td>
+                                        <td id="totalSession" class="text-primary">0.000 DT</td>
+                                        <td></td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
                     </div>
                     <div class="card-footer text-center py-3">
                         <button type="button" class="btn btn-success btn-lg px-5 shadow" onclick="imprimerBordereauFinal()">
@@ -171,52 +223,180 @@
 
     <div class="modal fade" id="paymentModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content border-0 shadow">
-                <div class="modal-header bg-primary text-white">
-                    <h5 class="modal-title fw-bold">Mode de Règlement</h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Confirmation du dépôt</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body p-4 d-grid gap-3">
-                    <button type="button" class="btn btn-outline-primary py-3 text-start" onclick="confirmPayment('Espèces')">
-                        <i class="bi bi-cash-stack me-3"></i>Espèces
-                    </button>
-                    <button type="button" class="btn btn-outline-dark py-3 text-start" onclick="confirmPayment('Chèque')">
-                        <i class="bi bi-card-checklist me-3"></i>Chèque
-                    </button>
+                <div class="modal-body">
+                    Souhaitez-vous confirmer cet envoi ?
                 </div>
+                <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+    <button type="button" class="btn btn-success btn-lg" onclick="validerEtImprimer()">
+        <i class="bi bi-printer me-2"></i> Valider et Imprimer l'étiquette
+    </button>
+</div>
             </div>
         </div>
-    </div>
+    
 
     <script th:inline="javascript">
     const paymentModal = new bootstrap.Modal(document.getElementById('paymentModal'));
     let sessionTotal = 0;
-    
-    window.checkreceiver = function() {
-        const tel = document.getElementById('receiverTel').value;
-        if (tel.length < 8) return; 
+/**
+ * Fonction principale : Enregistre, Imprime et Réinitialise le bloc Destinataire
+ */
+async function validerEtImprimer() {
+    // 1. Récupération et vérification du poids/prix
+    const weightInput = document.getElementById('parcelWeight');
+    const weight = parseFloat(weightInput.value) || 0;
 
-        fetch('/client/check/receiver?tel=' + encodeURIComponent(tel))
-        .then(res => {
-            if (!res.ok) throw new Error("Erreur serveur");
-            return res.json();
-        })
-        .then(data => {
-            if (data && data.recName) { 
-                console.log("Destinataire trouvé :", data);
-                document.getElementById('receiverName').value = data.recName;
-                document.getElementById('receiverAdress').value = data.adress;
-                document.getElementById('receiverPostal').value = data.postalCode;
-                
-                document.getElementById('receiverName').classList.add('is-valid');
-                setTimeout(() => document.getElementById('receiverName').classList.remove('is-valid'), 2000);
-            } else {
-                console.log("Nouveau destinataire (non trouvé)");
-            }
-        })
-        .catch(err => console.error("Erreur fetch destinataire:", err));
-    };
+    if (weight <= 0 || weight > 30) {
+        alert("Veuillez entrer un poids valide pour le colis (max 30kg)");
+        weightInput.focus();
+        return;
+    }
+
+    // 2. Préparation des données du formulaire
+    const form = document.getElementById('deliveryForm');
+    const formData = new FormData(form);
     
+    // On ajoute manuellement le mode de paiement si nécessaire
+    formData.append('paymentMode', 'Espèces');
+
+    try {
+        // 3. Persistance des données (Envoi au serveur)
+        const response = await fetch('/passenger/reserve', { 
+            method: 'POST', 
+            body: formData 
+        });
+
+        if (!response.ok) {
+            throw new Error(`Erreur serveur: ${response.status}`);
+        }
+
+        // Récupération du N° de suivi généré par le serveur
+        const trackingId = await response.text(); 
+
+        // 4. Fermeture de la Modal Bootstrap
+        const modalElement = document.getElementById('paymentModal');
+        if (modalElement) {
+            const modalInstance = bootstrap.Modal.getOrCreateInstance(modalElement);
+            modalInstance.hide();
+        }
+
+        // 5. Lancement de l'impression de l'étiquette
+        genererVueEtiquette(trackingId);
+
+        // 6. Notification de succès
+        showNotification(`Colis ${trackingId} enregistré avec succès !`, 'success');
+
+        // 7. --- RÉINITIALISATION DU BLOC DESTINATAIRE UNIQUEMENT ---
+        // Liste exacte des IDs basée sur votre code HTML
+        const fieldsToClear = [
+            'receiverName',      // Nom complet
+            'recSocialraison',   // Raison sociale
+            'receiverAdress',    // Adresse
+            'receiverTel',       // Numéro de Téléphone
+            'receiverVille',     // Ville
+            'receiverPostal',    // Code Postal
+            'parcelWeight'       // Poids du colis
+        ];
+
+        fieldsToClear.forEach(id => {
+            const field = document.getElementById(id);
+            if (field) {
+                field.value = ""; // Vide la valeur
+                field.classList.remove('is-valid', 'is-invalid'); // Nettoie les styles Bootstrap
+            }
+        });
+
+        // Nettoyage de l'affichage du prix
+        const priceZone = document.getElementById('pricezone');
+        if (priceZone) priceZone.innerText = "";
+
+        // 8. Mise à jour de la liste des colis en bas de page
+        const senderTel = document.getElementById('senderTel').value;
+        if (senderTel) {
+            loadClientParcels(senderTel);
+        }
+
+        // 9. Focus automatique sur le champ téléphone du prochain destinataire
+        setTimeout(() => {
+            const nextInput = document.getElementById('receiverTel');
+            if (nextInput) nextInput.focus();
+        }, 500);
+
+    } catch (err) {
+        console.error("Erreur de processus:", err);
+        showNotification("Erreur lors de l'enregistrement : " + err.message, 'error');
+    }
+}
+
+/**
+ * Fonction de génération de l'étiquette thermique (100x150mm)
+ */
+function genererVueEtiquette(trackingId) {
+    const sName = document.getElementById('senderName').value;
+    const sTel = document.getElementById('senderTel').value;
+    const rName = document.getElementById('receiverName').value;
+    const rTel = document.getElementById('receiverTel').value;
+    const rAddr = document.getElementById('receiverAdress').value;
+    const rVille = document.getElementById('receiverVille').value;
+    const weight = document.getElementById('parcelWeight').value;
+
+    const printWindow = window.open('', '_blank', 'width=600,height=800');
+    
+    printWindow.document.write(`
+        <html>
+        <head>
+            <title>Etiquette ${trackingId}</title>
+            <style>
+                @page { size: 100mm 150mm; margin: 0; }
+                body { font-family: 'Arial', sans-serif; margin: 0; padding: 5mm; }
+                .label-card { border: 2px solid #000; height: 135mm; padding: 4mm; position: relative; }
+                .header { border-bottom: 3px solid #000; padding-bottom: 2mm; text-align: center; margin-bottom: 4mm; }
+                .section { margin-bottom: 4mm; }
+                .label { font-size: 11px; text-transform: uppercase; color: #666; }
+                .value { font-size: 15px; font-weight: bold; display: block; }
+                .dest-box { border: 2px solid #000; padding: 3mm; background: #f9f9f9; }
+                .tracking-area { text-align: center; margin-top: 8mm; padding-top: 5mm; border-top: 1px dashed #000; }
+                .tracking-id { font-size: 24px; font-family: 'Courier New', monospace; font-weight: bold; }
+                .footer { position: absolute; bottom: 5mm; width: 92%; display: flex; justify-content: space-between; font-size: 12px; }
+            </style>
+        </head>
+        <body onload="window.print(); window.close();">
+            <div class="label-card">
+                <div class="header">
+                    <h2 style="margin:0;">NATIONAL EXPRESS</h2>
+                </div>
+                <div class="section">
+                    <span class="label">Expéditeur:</span>
+                    <span class="value">${sName}</span>
+                    <span class="value" style="font-weight:normal;">Tél: ${sTel}</span>
+                </div>
+                <div class="section dest-box">
+                    <span class="label">Destinataire:</span>
+                    <span class="value" style="font-size: 19px;">${rName}</span>
+                    <span class="value">${rAddr}</span>
+                    <span class="value">${rVille}</span>
+                    <span class="value">Tél: ${rTel}</span>
+                </div>
+                <div class="tracking-area">
+                    <div class="tracking-id">${trackingId}</div>
+                    <div style="margin-top:2mm; letter-spacing: 5px;">|||||||||||||||||||||||||||||||||</div>
+                </div>
+                <div class="footer">
+                    <span>Poids: <b>${weight} KG</b></span>
+                    <span>Date: <b>${new Date().toLocaleDateString()}</b></span>
+                </div>
+            </div>
+        </body>
+        </html>
+    `);
+    printWindow.document.close();
+}
     window.checkclient = function() {
         const tel = document.getElementById('senderTel').value;
         if (tel.length < 8) return; 
@@ -386,67 +566,7 @@
         return price;
     };
 
-    function confirmPayment(mode) {
-        const currentPrice = calculerprix();
-        if (currentPrice === 0) { 
-            alert("Veuillez entrer un poids valide (max 30kg)"); 
-            return; 
-        }
-        
-        // Validation des champs requis
-        const requiredFields = ['senderTel', 'senderName', 'receiverTel', 'receiverName', 'receiverAdress'];
-        for (const fieldId of requiredFields) {
-            const field = document.getElementById(fieldId);
-            if (!field.value.trim()) {
-                alert(`Le champ "${field.previousElementSibling.textContent}" est requis`);
-                field.focus();
-                return;
-            }
-        }
-        
-        paymentModal.hide();
-        const form = document.getElementById('deliveryForm');
-        const formData = new FormData(form);
-        formData.append('paymentMode', mode);
 
-        const senderTel = document.getElementById('senderTel').value;
-
-        fetch('/passenger/reserve', { 
-            method: 'POST', 
-            body: formData 
-        })
-        .then(res => {
-            if (!res.ok) throw new Error(`Erreur HTTP: ${res.status}`);
-            return res.text();
-        })
-        .then(trackingId => {
-            console.log("Colis enregistré avec N° Suivi :", trackingId);
-            
-            // Afficher un message de succès
-            showNotification(`Colis enregistré! N° Suivi: ${trackingId}`, 'success');
-            
-            // Imprimer le ticket automatiquement
-            const ticketUrl = '/passenger/success?track=' + trackingId;
-            window.open(ticketUrl, '_blank', 'width=450,height=650');
-
-            // Recharger les colis du client après ajout
-            if (senderTel) {
-                setTimeout(() => {
-                    loadClientParcels(senderTel);
-                }, 1000);
-            }
-
-            // Reset seulement les champs destinataire et poids
-            ['receiverTel', 'receiverName', 'receiverAdress', 'receiverPostal', 'parcelWeight'].forEach(id => {
-                document.getElementById(id).value = '';
-            });
-            document.getElementById('pricezone').innerText = '';
-        })
-        .catch(err => {
-            console.error("Erreur:", err);
-            showNotification("Erreur lors de l'enregistrement : " + err.message, 'error');
-        });
-    }
     
     // Fonction pour afficher des notifications
     function showNotification(message, type = 'info') {
@@ -474,200 +594,168 @@
             }
         }, 5000);
     }
+// Aide pour éviter les injections XSS
+function escapeHtml(text) {
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+}
 
-    // Fonction pour récupérer les données du serveur pour l'impression
-    async function fetchTableRowDataForPrint(tel) {
-        try {
-            const response = await fetch(`/client/check/parcel?tel=${encodeURIComponent(tel)}&format=print`, {
-                method: 'GET',
-                headers: {
-                    'Accept': 'application/json'
-                }
-            });
-            
-            if (!response.ok) throw new Error('Erreur serveur');
-            
-            const parcels = await response.json();
-            let html = '';
-            
-            // Générer les lignes à partir des données JSON
-            parcels.forEach(parcel => {
-                // Même logique pour extraire le trackingId
-                let trackingId = '';
-                if (parcel.trackingNumber) {
-                    if (parcel.trackingNumber.formattedParcelId) {
-                        trackingId = parcel.trackingNumber.formattedParcelId;
-                    }
-                    else if (parcel.trackingNumber.parcelId) {
-                        trackingId = "EN" + String(parcel.trackingNumber.parcelId).padStart(9, '0') + "TN";
-                    }
-                } else if (parcel.trackingId) {
-                    trackingId = parcel.trackingId;
-                } else if (parcel.id) {
-                    trackingId = "COLIS-" + parcel.id;
-                }
-                
-                const receiverName = parcel.receiver ? 
-                                   (parcel.receiver.recName || parcel.receiver.fullName || '') : 
-                                   (parcel.receiverName || '');
-                
-                const weight = parcel.weight || parcel.poids || 0;
-                const paymentMode = parcel.paymentMode || 
-                                  (parcel.modePaiement ? parcel.modePaiement : 'Espèces');
-                const price = parcel.price || 
-                             parcel.montant || 
-                             (parcel.prix ? parseFloat(parcel.prix) : 0);
-                
-                html += `<tr>
-                    <td>${escapeHtml(trackingId)}</td>
-                    <td>${escapeHtml(receiverName)}</td>
-                    <td>${parseFloat(weight).toFixed(2)} KG</td>
-                    <td>${escapeHtml(paymentMode)}</td>
-                    <td>${parseFloat(price).toFixed(3)} DT</td>
-                </tr>`;
-            });
-            
-            return html;
-        } catch (error) {
-            console.error('Erreur:', error);
-            return '<tr><td colspan="5">Erreur de chargement</td></tr>';
-        }
+async function imprimerBordereauFinal() {
+    const senderTel = document.getElementById('senderTel').value;
+    const senderName = document.getElementById('senderName').value || 'Non spécifié';
+    const senderAdress = document.getElementById('senderAdress').value || '';
+
+    if (!senderTel) {
+        alert("Veuillez d'abord saisir le numéro de téléphone de l'expéditeur");
+        return;
     }
 
-    async function imprimerBordereauFinal() {
-        const senderTel = document.getElementById('senderTel').value;
-        if (!senderTel) {
-            alert("Veuillez d'abord saisir le numéro de téléphone de l'expéditeur");
+    try {
+        // 1. Récupération des données JSON depuis le serveur
+        const response = await fetch(`/client/check/parcel?validate=true&tel=${encodeURIComponent(senderTel)}&format=print`, {
+            method: 'GET',
+            headers: { 'Accept': 'application/json' }
+        });
+
+        if (!response.ok) throw new Error('Erreur lors de la récupération des colis');
+
+        const parcels = await response.json();
+        
+        if (parcels.length === 0) {
+            alert("Aucun colis trouvé pour cet expéditeur.");
             return;
         }
-        
-        try {
-            const tableRowsHtml = await fetchTableRowDataForPrint(senderTel);
-            
-            const printWin = window.open('', '_blank', 'width=800,height=600');
-            printWin.document.write(`
-                <!DOCTYPE html>
-                <html lang="fr">
-                <head>
-                    <meta charset="UTF-8">
-                    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                    <title>Bordereau de Session</title>
-                    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-                    <style>
-                        @media print {
-                            body { padding: 20px; }
-                            .no-print { display: none; }
-                            @page { margin: 20px; }
-                        }
-                        body { font-family: 'Arial', sans-serif; font-size: 12px; }
-                        .header { border-bottom: 3px solid #333; padding-bottom: 15px; margin-bottom: 20px; }
-                        .total-row { font-weight: bold; background-color: #f8f9fa; }
-                        table { width: 100%; border-collapse: collapse; }
-                        th { background-color: #f2f2f2; padding: 8px; border: 1px solid #ddd; }
-                        td { padding: 8px; border: 1px solid #ddd; }
-                        .text-center { text-align: center; }
-                        .text-end { text-align: right; }
-                        .mb-3 { margin-bottom: 1rem; }
-                        .mt-3 { margin-top: 1rem; }
-                    </style>
-                </head>
-                <body>
-                    <div class="container-fluid">
-                        <div class="header text-center">
-                            <h2>BORDEREAU DE SESSION</h2>
-                            <h4>Expéditeur: ${escapeHtml(document.getElementById('senderName').value || 'Non spécifié')}</h4>
-                            <p>Téléphone: ${senderTel} - Adresse: ${escapeHtml(document.getElementById('senderAdress').value || '')}</p>
-                            <p>Date: ${new Date().toLocaleDateString('fr-FR')} - Heure: ${new Date().toLocaleTimeString('fr-FR')}</p>
-                        </div>
-                        
-                        <table class="table table-bordered mb-3">
-                            <thead class="table-light">
-                                <tr>
-                                    <th>N° Suivi</th>
-                                    <th>Destinataire</th>
-                                    <th>Poids (KG)</th>
-                                    <th>Mode de paiement</th>
-                                    <th>Montant (DT)</th>
-                                </tr>
-                            </thead>
-                            <tbody>${tableRowsHtml}</tbody>
-                            <tfoot>
-                                <tr class="total-row">
-                                    <td colspan="4" class="text-end"><strong>TOTAL GÉNÉRAL :</strong></td>
-                                    <td><strong>${sessionTotal.toFixed(3)} DT</strong></td>
-                                </tr>
-                            </tfoot>
-                        </table>
-                        
-                        <div class="mt-3">
-                            <div class="row">
-                                <div class="col-6">
-                                    <p><strong>Nombre de colis:</strong> ${document.querySelectorAll('#sessionTable tbody tr').length}</p>
-                                    <p><strong>Total poids:</strong> ${calculateTotalWeight()} KG</p>
-                                </div>
-                                <div class="col-6 text-end">
-                                    <p><strong>Signature :</strong></p>
-                                    <p style="margin-top: 80px;">_________________________</p>
-                                    <p>Cachet et signature</p>
-                                </div>
+
+        // 2. Préparation du contenu du tableau et calcul des totaux
+        let tableRowsHtml = '';
+        let totalGeneral = 0;
+        let totalPoids = 0;
+
+        parcels.forEach(parcel => {
+            // Extraction du Tracking ID
+            let trackingId = parcel.trackingNumber?.formattedParcelId || 
+                             parcel.trackingId || 
+                             (parcel.id ? "COLIS-" + parcel.id : "N/A");
+
+            const receiverName = parcel.receiver?.recName || parcel.receiverName || 'Inconnu';
+            const weight = parseFloat(parcel.weight || parcel.poids || 0);
+            const price = parseFloat(parcel.price || parcel.montant || parcel.prix || 0);
+            const paymentMode = parcel.paymentMode || parcel.modePaiement || 'Espèces';
+
+            totalGeneral += price;
+            totalPoids += weight;
+
+            tableRowsHtml += `
+                <tr>
+                    <td>${escapeHtml(trackingId)}</td>
+                    <td>${escapeHtml(receiverName)}</td>
+                    <td class="text-center">${weight.toFixed(2)} KG</td>
+                    <td class="text-center">${escapeHtml(paymentMode)}</td>
+                    <td class="text-end">${price.toFixed(3)} DT</td>
+                </tr>`;
+        });
+
+        // 3. Génération de la fenêtre d'impression
+        const printWin = window.open('', '_blank', 'width=900,height=700');
+        printWin.document.write(`
+            <!DOCTYPE html>
+            <html>
+            <head>
+                <title>Bordereau de Session - ${senderName}</title>
+                <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+                <style>
+                    body { font-family: 'Segoe UI', Arial, sans-serif; font-size: 13px; color: #333; }
+                    .header-box { border-bottom: 3px solid #000; margin-bottom: 20px; padding-bottom: 10px; }
+                    .table thead { background-color: #f8f9fa !important; }
+                    .total-section { background-color: #eee; font-weight: bold; }
+                    .signature-box { margin-top: 50px; border-top: 1px solid #ccc; padding-top: 10px; }
+                    @media print { .no-print { display: none; } }
+                </style>
+            </head>
+            <body>
+                <div class="container mt-4">
+                    <div class="header-box text-center">
+                        <h2 class="fw-bold">BORDEREAU DE SESSION</h2>
+                        <div class="row mt-3">
+                            <div class="col-6 text-start">
+                                <strong>Expéditeur :</strong> ${escapeHtml(senderName)}<br>
+                                <strong>Téléphone :</strong> ${senderTel}<br>
+                                <strong>Adresse :</strong> ${escapeHtml(senderAdress)}
+                            </div>
+                            <div class="col-6 text-end">
+                                <strong>Date :</strong> ${new Date().toLocaleDateString('fr-FR')}<br>
+                                <strong>Heure :</strong> ${new Date().toLocaleTimeString('fr-FR')}<br>
+                                <strong>Nombre de colis :</strong> ${parcels.length}
                             </div>
                         </div>
-                        
-                        <div class="text-center mt-4 no-print">
-                            <button class="btn btn-primary btn-sm me-2" onclick="window.print()">
-                                <i class="bi bi-printer"></i> Imprimer
-                            </button>
-                            <button class="btn btn-secondary btn-sm" onclick="window.close()">
-                                <i class="bi bi-x-circle"></i> Fermer
-                            </button>
+                    </div>
+
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>N° Suivi</th>
+                                <th>Destinataire</th>
+                                <th class="text-center">Poids</th>
+                                <th class="text-center">Paiement</th>
+                                <th class="text-end">Montant</th>
+                            </tr>
+                        </thead>
+                        <tbody>${tableRowsHtml}</tbody>
+                        <tfoot>
+                            <tr class="total-section">
+                                <td colspan="2" class="text-end">TOTAL RÉCAPITULATIF</td>
+                                <td class="text-center">${totalPoids.toFixed(2)} KG</td>
+                                <td></td>
+                                <td class="text-end">${totalGeneral.toFixed(3)} DT</td>
+                            </tr>
+                        </tfoot>
+                    </table>
+
+                    <div class="row mt-5">
+                        <div class="col-6">
+                            <p class="small text-muted">Bordereau généré électroniquement.</p>
+                        </div>
+                        <div class="col-6 text-end">
+                            <p class="fw-bold">Signature et Cachet :</p>
+                            <div style="height: 100px;"></div>
+                            <p>_________________________</p>
                         </div>
                     </div>
-                    
-                    <script>
-                        window.onload = function() { 
-                            // Auto-impression optionnelle
-                            // setTimeout(() => window.print(), 500);
-                        };
-                        
-                        function calculateTotalWeight() {
-                            const rows = document.querySelectorAll('tbody tr');
-                            let total = 0;
-                            rows.forEach(row => {
-                                const cells = row.querySelectorAll('td');
-                                if (cells[2]) {
-                                    const weightText = cells[2].textContent;
-                                    const weight = parseFloat(weightText.replace(' KG', '')) || 0;
-                                    total += weight;
-                                }
-                            });
-                            return total.toFixed(2);
-                        }
-                    <\/script>
-                </body>
-                </html>
-            `);
-            
-        } catch (error) {
-            console.error("Erreur lors de l'impression :", error);
-            showNotification("Erreur lors de la génération du bordereau", 'error');
-        }
-    }
-    
-    // Fonction pour calculer le poids total
-    function calculateTotalWeight() {
-        const rows = document.querySelectorAll('#sessionTable tbody tr');
-        let total = 0;
-        rows.forEach(row => {
-            const cells = row.querySelectorAll('td');
-            if (cells[2]) {
-                const weightText = cells[2].textContent;
-                const weight = parseFloat(weightText.replace(' KG', '')) || 0;
-                total += weight;
-            }
-        });
-        return total.toFixed(2);
-    }
+
+                    <div class="text-center mt-4 no-print">
+                        <button class="btn btn-primary" onclick="window.print()">Imprimer le Bordereau</button>
+                        <button class="btn btn-secondary" onclick="window.close()">Fermer</button>
+                    </div>
+                </div>
+            </body>
+            </html>
+        `);
+        printWin.document.close();
+        await checkDelivered();
+
+    } catch (error) {
+        console.error("Erreur critique :", error);
+        alert("Impossible de générer le bordereau : " + error.message);
+    }};
+// Attendre 2 secondes (2000 ms) avant de recharger la page
+ window.checkDelivered = async function() {
+    const senderTelValue = document.getElementById('senderTel').value;
+    const response= await fetch('/client/validate-session?tel=' + encodeURIComponent(senderTelValue) , {
+        method: 'GET',
+        headers: { 'Accept': 'application/json' }
+    });
+if (!response.ok) {
+        throw new Error('Erreur lors de la validation de la session');
+    }else{}
+    setTimeout(() => {
+        location.reload();
+    }, 2000);
+
+
+}
 </script>
 </div>
+
 </body>
 </html>

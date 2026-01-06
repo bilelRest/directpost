@@ -1,6 +1,10 @@
+<<<<<<< HEAD
 # Replace the deprecated openjdk line with this:
 FROM eclipse-temurin:17-jdk-jammy
 
+=======
+FROM openjdk:17-jdk-slim
+>>>>>>> b131ec60a55e4e49fa7da1df8ca94c42bf6f68c3
 WORKDIR /app
 
 # The rest of your file remains the same

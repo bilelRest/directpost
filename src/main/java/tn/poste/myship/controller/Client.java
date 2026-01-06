@@ -2,6 +2,7 @@ package tn.poste.myship.controller;
 
 import java.util.List;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,8 +31,14 @@ public class Client {
     }
     @GetMapping("/check/parcel")
     @ResponseBody
-    public List<Parcel> validateClient(@RequestParam("tel") Long tel) {
+    public List<Parcel> validateClient(@RequestParam("tel") Long tel,@RequestParam(value="validate", required=false) Boolean validate) {
         List<Parcel> parcels= parcelRepo.findBySendTelAndDeliveredFalse(tel);
+        if( validate!=null && validate){
+            for (Parcel parcel : parcels) {
+                parcel.setDelivered(true);
+                parcelRepo.save(parcel);
+            }
+        }
        
         return parcels;
     }
@@ -46,5 +53,18 @@ public Sender checkclient(@RequestParam("tel") Long tel) {
 public Receiver checkReceiver(@RequestParam("tel") Long tel) {
     Receiver receiver = receiverRepo.findByRecTel(tel);
     return (receiver != null) ? receiver : new Receiver(); // Retourne un objet vide au lieu de null
+}
+@GetMapping("/validate-session")
+@ResponseBody
+public ResponseEntity<?> validateSession(@RequestParam("tel") Long tel) {
+    // Recherche des colis
+    List<Parcel> parcels = parcelRepo.findBySendTelAndDeliveredFalse(tel);
+    
+    if(parcels.isEmpty()) {
+        return ResponseEntity.ok("Aucun colis en attente pour ce numéro.");
+    }
+    
+    // Correction ici : .ok() prépare le builder, .build() crée la réponse vide avec code 200
+    return ResponseEntity.ok().build();
 }
 }

@@ -15,8 +15,8 @@ public class Sender {
     private Long sendTel;
     private String adress;
     private Long postalCode;
-
-    public Sender(String sendName, String sendSocialReason, Long sendTel, String adress, Long postalCode) {
+    private String city;
+    public Sender(String sendName, String sendSocialReason, Long sendTel, String adress, Long postalCode, String city) {
         this.sendName = sendName;
         this.sendSocialReason = sendSocialReason;
         this.sendTel = sendTel;
@@ -73,5 +73,13 @@ public class Sender {
 
     public void setPostalCode(Long postalCode) {
         this.postalCode = postalCode;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
     }
 }

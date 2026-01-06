@@ -15,11 +15,14 @@ public class Receiver {
     private Long recTel;
     private String adress;
     private Long postalCode;
+    private String country;
+    private String city;
 
     public Receiver() {
     }
 
-    public Receiver(String recName, String recSocialReason, Long recTel, String adress, Long postalCode) {
+    public Receiver(String recName, String recSocialReason, Long recTel, String adress, Long postalCode,String country, String city) {
+        this.country=country;
         this.recName = recName;
         this.recSocialReason = recSocialReason;
         this.recTel = recTel;
@@ -73,5 +76,21 @@ public class Receiver {
 
     public void setPostalCode(Long postalCode) {
         this.postalCode = postalCode;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
     }
 }
