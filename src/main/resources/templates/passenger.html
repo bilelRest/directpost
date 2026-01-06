@@ -56,6 +56,13 @@
         </div>
         <div class="card-body py-2">
             <div class="row g-1 align-items-end">
+                <div class="col-md-1">
+                    <label class="small fw-bold text-muted mb-0" style="font-size: 0.6rem;">PAYS</label>
+                    <select id="recCountry" name="receiver.country" class="form-select form-select-sm bg-light border-0 shadow-none">
+                        <option value="Tunisie" selected>Tunisie</option>
+                        <option value="Autre">Autre</option>
+                    </select>
+                </div>
                 <div class="col-md-2">
                     <label class="small fw-bold text-muted mb-0" style="font-size: 0.6rem;">NOM COMPLET</label>
                     <input id="receiverName" name="receiver.recName" type="text" class="form-control form-control-sm border-warning border-opacity-50" placeholder="Nom & Prénom" required />
@@ -73,20 +80,15 @@
                     <input id="receiverVille" name="receiver.ville" type="text" class="form-control form-control-sm border-warning border-opacity-50" placeholder="Ville" required />
                 </div>
                 <div class="col-md-1">
-                    <label class="small fw-bold text-muted mb-0" style="font-size: 0.6rem;">TÉLÉPHONE</label>
-                    <input id="receiverTel" name="receiver.recTel" type="tel" class="form-control form-control-sm border-warning border-opacity-50" placeholder="9x..." required />
-                </div>
-                <div class="col-md-1">
                     <label class="small fw-bold text-muted mb-0" style="font-size: 0.6rem;">CP</label>
                     <input id="receiverPostal" name="receiver.postalCode" type="text" class="form-control form-control-sm border-warning border-opacity-50" placeholder="CP" />
                 </div>
                 <div class="col-md-1">
-                    <label class="small fw-bold text-muted mb-0" style="font-size: 0.6rem;">PAYS</label>
-                    <select id="recCountry" name="receiver.country" class="form-select form-select-sm bg-light border-0 shadow-none">
-                        <option value="Tunisie" selected>Tunisie</option>
-                        <option value="Autre">Autre</option>
-                    </select>
+                    <label class="small fw-bold text-muted mb-0" style="font-size: 0.6rem;">TÉLÉPHONE</label>
+                    <input id="receiverTel" name="receiver.recTel" type="tel" class="form-control form-control-sm border-warning border-opacity-50" placeholder="9x..." required />
                 </div>
+                
+                
             </div>
         </div>
     </div>
