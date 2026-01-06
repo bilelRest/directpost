@@ -124,6 +124,19 @@
                             <option value="Marchandise">Marchandise</option>
                         </select>
                     </div>
+                    <div class="col-md-1 d-none" id="dimensionsContainer">
+                        <div class="d-flex gap-1">
+                         <label class="small fw-bold text-muted d-block" style="font-size: 0.6rem;">Longr</label>
+
+                            <input id="longeur" type="number" class="form-control form-control-sm" placeholder="L" oninput="calculerprix()">
+                                                     <label class="small fw-bold text-muted d-block" style="font-size: 0.6rem;">larg</label>
+
+                            <input id="largeur" type="number" class="form-control form-control-sm" placeholder="W" oninput="calculerprix()">
+                                                     <label class="small fw-bold text-muted d-block" style="font-size: 0.6rem;">Haut</label>
+
+                            <input id="hauteur" type="number" class="form-control form-control-sm" placeholder="H" oninput="calculerprix()">
+                        </div>
+                    </div>
 
                     <div class="col-md-2">
                         <div class="input-group input-group-sm">
@@ -132,7 +145,7 @@
                         </div>
                     </div>
 
-                    <div class="col-md-3 d-flex align-items-center justify-content-end">
+                    <div class="col-md-2 d-flex align-items-center justify-content-end">
                         <span id="pricezone" class="fw-bold fs-5 text-primary me-2">0.000 DT</span>
                        <button type="button" id="btnValider" onclick="validerEtImprimer()" class="btn btn-success btn-sm px-3 fw-bold shadow-sm">
     VALIDER
@@ -145,14 +158,7 @@
                         <label class="small fw-bold text-muted" style="font-size: 0.6rem;">DONNÉES FACTURE</label>
                         <input type="text" class="form-control form-control-sm border-info" placeholder="Détails du contenu...">
                     </div>
-                    <div class="col-md-6 d-none" id="dimensionsContainer">
-                        <label class="small fw-bold text-muted d-block" style="font-size: 0.6rem;">DIMENSIONS (CM)</label>
-                        <div class="d-flex gap-1">
-                            <input id="longeur" type="number" class="form-control form-control-sm" placeholder="L" oninput="calculerprix()">
-                            <input id="largeur" type="number" class="form-control form-control-sm" placeholder="W" oninput="calculerprix()">
-                            <input id="hauteur" type="number" class="form-control form-control-sm" placeholder="H" oninput="calculerprix()">
-                        </div>
-                    </div>
+                    
                 </div>
             </div>
         </div>
