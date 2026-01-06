@@ -5,176 +5,129 @@
       layout:decorate="~{template}">
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=0.7" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Dépôt Passager - National</title>
 </head>
 <body>
 <div layout:fragment="content1">
-    <div class="container mb-0">
-        
-        <form autocomplete="off" id="deliveryForm">
-            <div class="row g-4">
-                <div class="col-lg-6">
-                    <div class="card shadow-sm border-0 h-100">
-                        <div class="card-header border-0 py-3 bg-primary bg-opacity-10">
-                            <h5 class="mb-0 text-primary fw-bold">
-                                <i class="bi bi-person-up me-2"></i>Expéditeur
-                            </h5>
-                        </div>
-                        <div class="card-body">
-                            <div class="mb-3">
-                                <label class="form-label fw-semibold">Numéro de Téléphone</label>
-                                <input onchange="checkclient()" id="senderTel" name="sender.sendTel" type="tel" class="form-control" placeholder="5x xxx xxx" required />
-                            </div>
-                            
-                            <div class="mb-3">
-                                <label class="form-label fw-semibold">Nom complet</label>
-                                <input id="senderName" name="sender.sendName" type="text" class="form-control" placeholder="Nom & Prénom" required />
-                            </div>
+    <div class="container-fluid mb-0 p-0">
+   <form autocomplete="off" id="deliveryForm" class="w-100">
 
-                            <div class="mb-3">
-                                <label class="form-label fw-semibold">Raison sociale (Optionnel)</label>
-                                <input id="sendSocialReason" name="sender.sendSocialReason" type="text" class="form-control" />
-                            </div>
-
-                            <div class="row g-3">
-                                <div class="col-12">
-                                    <label class="form-label fw-semibold">Adresse</label>
-                                    <input id="senderAdress" name="sender.adress" type="text" class="form-control" placeholder="Rue, Immeuble, Appt" required />
-                                </div>
-                                <div class="col-md-6">
-                                    <label class="form-label fw-semibold">Ville</label>
-                                    <input id="senderVille" name="sender.ville" type="text" class="form-control" required />
-                                </div>
-                                <div class="col-md-6">
-                                    <label class="form-label fw-semibold">Code Postal</label>
-                                    <input id="senderPostal" name="sender.postalCode" type="text" class="form-control" />
-                                </div>
-                                <div class="col-12">
-                                    <label class="form-label fw-semibold">Pays</label>
-                                    <input value="Tunisie" id="senderCountry" name="sender.country" type="text" class="form-control bg-light" readonly />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+            <div class="card shadow-sm border-0 mb-2 border-start border-primary border-4">
+                <div class="card-header border-0 py-1 bg-primary  d-flex align-items-center">
+                    <h6 class="mb-0 text-primary fw-bold" style="font-size: 0.8rem;"><i class="bi bi-person-up me-1"></i>EXPÉDITEUR</h6>
                 </div>
-
-                <div class="col-lg-6">
-                    <div class="card shadow-sm border-0 h-100">
-                        <div class="card-header border-0 py-3 bg-warning bg-opacity-10">
-                            <h5 class="mb-0 text-warning fw-bold">
-                                <i class="bi bi-person-down me-2 text-success"></i>Destinataire
-                            </h5>
+                <div class="card-body py-2">
+                    <div class="row g-1 align-items-end">
+                        <div class="col-md-1">
+                            <label class="small fw-bold text-muted mb-0" style="font-size: 0.6rem;">TÉLÉPHONE</label>
+                            <input onchange="checkclient()" id="senderTel" name="sender.sendTel" type="tel" class="form-control form-control-sm border-primary border-opacity-25" placeholder="5x..." required />
                         </div>
-                        <div class="card-body">
-                           
-
-                            <div class="mb-3">
-                                <label class="form-label fw-semibold">Nom complet</label>
-                                <input id="receiverName" name="receiver.recName" type="text" class="form-control" placeholder="Nom & Prénom" required />
-                            </div>
- 
-                            <div class="mb-3">
-                                <label class="form-label fw-semibold">Raison sociale (Optionnel)</label>
-                                <input id="recSocialraison" name="receiver.recSocialraison" type="text" class="form-control" />
-                            </div>
-
-                            <div class="row g-3">
-                                <div class="col-12">
-                                    <label class="form-label fw-semibold">Adresse</label>
-                                    <input id="receiverAdress" name="receiver.adress" type="text" class="form-control" placeholder="Rue, Immeuble, Appt" required />
-                                </div>
-                                <div class="mb-3">
-                                <label class="form-label fw-semibold">Numéro de Téléphone</label>
-                                <input id="receiverTel" name="receiver.recTel" type="tel" class="form-control" placeholder="9x xxx xxx" required />
-                            </div>
-                                <div class="col-md-6">
-                                    <label class="form-label fw-semibold">Ville</label>
-                                    <input id="receiverVille" name="receiver.ville" type="text" class="form-control" required />
-                                </div>
-                                <div class="col-md-6">
-                                    <label class="form-label fw-semibold">Code Postal</label>
-                                    <input id="receiverPostal" name="receiver.postalCode" type="text" class="form-control" />
-                                </div>
-                                <div class="col-12">
-                                    <label class="form-label fw-semibold">Pays</label>
-                                    <select value="Tunisie" id="recCountry" name="receiver.country"  class="form-control bg-light"  >
-                                    <option value="Tunisie" selected>Tunisie</option>
-                                    <option value="Autre">Autre</option>
-                                    </select>
-                                </div>
-                            </div>
+                        <div class="col-md-2">
+                            <label class="small fw-bold text-muted mb-0" style="font-size: 0.6rem;">NOM COMPLET</label>
+                            <input id="senderName" name="sender.sendName" type="text" class="form-control form-control-sm border-primary border-opacity-25" placeholder="Nom & Prénom" required />
                         </div>
-                    </div>
-                </div>
-               <div class="col-12">
-       <div class="col-12 mt-4">
-   <div class="col-12 mt-3">
-    <div class="row g-2">
-        <div class="col-6 col-md-3">
-            <input type="radio" class="btn-check" name="btnradio" id="btncheck1" value="EMS National" checked>
-            <label class="btn btn-outline-primary compact-card shadow-none" for="btncheck1">
-                <i class="bi bi-truck fs-4 mb-1"></i>
-                <span class="text-label">EMS NATIONAL</span>
-            </label>
-        </div>
-
-        
-
-        <div class="col-6 col-md-3">
-            <input type="radio" class="btn-check" name="btnradio" id="btncheck3" value="RPPI">
-            <label class="btn btn-outline-warning compact-card shadow-none" for="btncheck3">
-                <i class="bi bi-envelope-check fs-4 mb-1"></i>
-                <span class="text-label">RPP INTERNATIONAL</span>
-            </label>
-        </div>
-<div class="col-6 col-md-3">
-            <input type="radio" class="btn-check" name="btnradio" id="btncheck2" value="EMS International">
-            <label class="btn btn-outline-info compact-card shadow-none" for="btncheck2">
-                <i class="bi bi-globe-americas fs-4 mb-1"></i>
-                <span class="text-label">EMS INTERNATIONAL</span>
-            </label>
-        </div>
-        <div class="col-6 col-md-3">
-            <input type="radio" class="btn-check" name="btnradio" id="btncheck4" value="Bouquet de fleurs">
-            <label class="btn btn-outline-success compact-card shadow-none" for="btncheck4">
-                <i class="bi bi-flower1 fs-4 mb-1"></i>
-                <span class="text-label">FLEURS DE POSTE</span>
-            </label>
-        </div>
-    </div>
-</div>
-
-                <div class="col-12">
-                    <div class="card border-primary shadow-sm" style="border-style: dashed; border-width: 2px; background-color: #f8faff;">
-                        <div class="card-body py-4">
-                            <div class="row align-items-center g-3">
-                                <div class="col-md-4">
-                                    <h5 class="mb-0 fw-bold"><i class="bi bi-weight me-2 text-info"></i>Poids du colis (KG)</h5>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="input-group">
-                                        <input oninput="calculerprix()" type="number" step="0.01" id="parcelWeight" name="weight" class="form-control form-control-lg border-primary" placeholder="0.00" required>
-                                        <span class="input-group-text fw-bold bg-info text-white">KG</span>
-                                    </div>
-                                </div>
-                                <div class="col-md-4 d-flex align-items-center justify-content-between">
-                                    <h5 id="pricezone" class="mb-0 text-primary fw-bold fs-4"></h5>
-                                    <button type="button" class="btn btn-success btn-lg px-4 shadow" data-bs-toggle="modal" data-bs-target="#paymentModal">
-                                        <i class="bi bi-check-circle me-2"></i>Valider
-                                    </button>
-                                </div>
-                            </div>
+                        <div class="col-md-2">
+                            <label class="small fw-bold text-muted mb-0" style="font-size: 0.6rem;">RAISON SOCIALE</label>
+                            <input id="sendSocialReason" name="sender.sendSocialReason" type="text" class="form-control form-control-sm border-primary border-opacity-25" placeholder="Optionnel" />
+                        </div>
+                        <div class="col-md-3">
+                            <label class="small fw-bold text-muted mb-0" style="font-size: 0.6rem;">ADRESSE</label>
+                            <input id="senderAdress" name="sender.adress" type="text" class="form-control form-control-sm border-primary border-opacity-25" placeholder="Rue, Immeuble..." required />
+                        </div>
+                        <div class="col-md-2">
+                            <label class="small fw-bold text-muted mb-0" style="font-size: 0.6rem;">VILLE</label>
+                            <input id="senderVille" name="sender.ville" type="text" class="form-control form-control-sm border-primary border-opacity-25" placeholder="Ville" required />
+                        </div>
+                        <div class="col-md-1">
+                            <label class="small fw-bold text-muted mb-0" style="font-size: 0.6rem;">CP</label>
+                            <input id="senderPostal" name="sender.postalCode" type="text" class="form-control form-control-sm border-primary border-opacity-25" placeholder="CP" />
+                        </div>
+                        <div class="col-md-1">
+                            <label class="small fw-bold text-muted mb-0" style="font-size: 0.6rem;">PAYS</label>
+                            <input value="Tunisie" id="senderCountry" name="sender.country" type="text" class="form-control form-control-sm bg-light border-0" readonly />
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="row mt-4">
-                <div class="col-12 text-center">
-                    <button type="button" class="btn btn-outline-secondary px-4" onclick="document.getElementById('deliveryForm').reset(); document.getElementById('pricezone').innerText=''">
-                        <i class="bi bi-arrow-counterclockwise me-2"></i>Réinitialiser le formulaire
-                    </button>
+            <div class="card shadow-sm border-0 mb-2 border-start border-warning border-4">
+                <div class="card-header border-0 py-1 bg-warning  d-flex align-items-center">
+                    <h6 class="mb-0 text-dark fw-bold" style="font-size: 0.8rem;"><i class="bi bi-person-down me-1 text-success"></i>DESTINATAIRE</h6>
+                </div>
+                <div class="card-body py-2">
+                    <div class="row g-1 align-items-end">
+                        
+                        <div class="col-md-2">
+                            <label class="small fw-bold text-muted mb-0" style="font-size: 0.6rem;">NOM COMPLET</label>
+                            <input id="receiverName" name="receiver.recName" type="text" class="form-control form-control-sm border-warning border-opacity-50" placeholder="Nom & Prénom" required />
+                        </div>
+                        <div class="col-md-2">
+                            <label class="small fw-bold text-muted mb-0" style="font-size: 0.6rem;">RAISON SOCIALE</label>
+                            <input id="recSocialraison" name="receiver.recSocialraison" type="text" class="form-control form-control-sm border-warning border-opacity-50" placeholder="Optionnel" />
+                        </div>
+                        <div class="col-md-3">
+                            <label class="small fw-bold text-muted mb-0" style="font-size: 0.6rem;">ADRESSE</label>
+                            <input id="receiverAdress" name="receiver.adress" type="text" class="form-control form-control-sm border-warning border-opacity-50" placeholder="Rue, Immeuble..." required />
+                        </div>
+                        <div class="col-md-2">
+                            <label class="small fw-bold text-muted mb-0" style="font-size: 0.6rem;">VILLE</label>
+                            <input id="receiverVille" name="receiver.ville" type="text" class="form-control form-control-sm border-warning border-opacity-50" placeholder="Ville" required />
+                        </div>
+                        <div class="col-md-1">
+                            <label class="small fw-bold text-muted mb-0" style="font-size: 0.6rem;">TÉLÉPHONE</label>
+                            <input id="receiverTel" name="receiver.recTel" type="tel" class="form-control form-control-sm border-warning border-opacity-50" placeholder="9x..." required />
+                        </div>
+                        <div class="col-md-1">
+                            <label class="small fw-bold text-muted mb-0" style="font-size: 0.6rem;">CP</label>
+                            <input id="receiverPostal" name="receiver.postalCode" type="text" class="form-control form-control-sm border-warning border-opacity-50" placeholder="CP" />
+                        </div>
+                        <div class="col-md-1">
+                            <label class="small fw-bold text-muted mb-0" style="font-size: 0.6rem;">PAYS</label>
+                            <select id="recCountry" name="receiver.country" class="form-select form-select-sm bg-light border-0">
+                                <option value="Tunisie" selected>Tunisie</option>
+                                <option value="Autre">Autre</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card border-0 shadow-sm bg-light">
+                <div class="card-body py-2">
+                    <div class="row g-2 align-items-center">
+                        <div class="col-md-6">
+                            <div class="btn-group w-100 shadow-sm">
+                                <input type="radio" class="btn-check" name="btnradio" id="btncheck1" value="EMS National" checked onchange="calculerprix()">
+                                <label class="btn btn-outline-primary btn-sm fw-bold" for="btncheck1"><i class="bi bi-truck"></i> EMS NAT</label>
+
+                                <input type="radio" class="btn-check" name="btnradio" id="btncheck2" value="EMS International" onchange="calculerprix()">
+                                <label class="btn btn-outline-info btn-sm fw-bold" for="btncheck2"><i class="bi bi-globe"></i> EMS INT</label>
+
+                                <input type="radio" class="btn-check" name="btnradio" id="btncheck3" value="RPPI" onchange="calculerprix()">
+                                <label class="btn btn-outline-warning btn-sm fw-bold text-dark" for="btncheck3"><i class="bi bi-envelope"></i> RPPI</label>
+
+                                <input type="radio" class="btn-check" name="btnradio" id="btncheck4" value="Bouquet de fleurs" onchange="calculerprix()">
+                                <label class="btn btn-outline-success btn-sm fw-bold" for="btncheck4"><i class="bi bi-flower1"></i> FLEURS</label>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-2">
+                            <div class="input-group input-group-sm">
+                                <input oninput="calculerprix()" type="number" step="0.1" id="parcelWeight" name="weight" class="form-control border-primary fw-bold" placeholder="Poids">
+                                <span class="input-group-text bg-primary text-white border-primary">KG</span>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4 d-flex align-items-center justify-content-end">
+                            <div class="me-3 text-end">
+                                <span id="pricezone" class="fw-bold fs-5 text-primary">0.000 DT</span>
+                            </div>
+                            <button type="button" class="btn btn-success btn-sm px-4 fw-bold shadow-sm" data-bs-toggle="modal" data-bs-target="#paymentModal">
+                                VALIDER
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </form>

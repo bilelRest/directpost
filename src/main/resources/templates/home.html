@@ -5,119 +5,165 @@
       layout:decorate="~{template}">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=0.5">
-    <link rel="stylesheet" href="/webjars/bootstrap/5.3.3/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/webjars/bootstrap-icons/1.10.5/font/bootstrap-icons.css">
-    <script src="/webjars/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
-    <title>DirectPost - Accueil</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.3/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap-icons/1.10.5/font/bootstrap-icons.css}">
+    <script th:src="@{/webjars/bootstrap/5.3.3/js/bootstrap.bundle.min.js}"></script>
     
     <style>
+        :root {
+            --postal-blue: #0056b3;
+            --postal-yellow: #ffc107;
+            --soft-bg: #f8f9fa;
+        }
+
+        body {
+            background-color: var(--soft-bg);
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+        }
+
+        /* Hero Section Moderne */
+        .hero-section {
+            background: linear-gradient(135deg, #0056b3 0%, #003d7a 100%);
+            padding: 80px 0;
+            border-radius: 0 0 50px 50px;
+            margin-bottom: -50px;
+        }
+
+        /* Cartes de service */
         .service-card {
+            border: none;
+            border-radius: 24px;
+            background: #ffffff;
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
             position: relative;
             overflow: hidden;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
         }
+
         .service-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.175) !important;
+            transform: translateY(-12px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.12);
         }
-        .service-content {
-            position: relative;
-            z-index: 1;
-            padding: 2rem 1rem;
+
+        /* Icônes circulaires */
+        .icon-box {
+            width: 80px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 20px;
+            margin: 0 auto 20px;
+            transition: transform 0.3s ease;
         }
+
+        .service-card:hover .icon-box {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        /* Overlay Interactif */
         .service-overlay {
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(255, 255, 255, 0.97);
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(255, 255, 255, 0.95);
             display: flex;
-            flex-direction: column;
-            justify-content: center;
             align-items: center;
+            justify-content: center;
             opacity: 0;
             transition: opacity 0.3s ease;
-            z-index: 2;
-            gap: 12px;
-            padding: 15px;
+            z-index: 5;
         }
+
         .service-card:hover .service-overlay {
             opacity: 1;
         }
-        .display-4 {
-            transition: transform 0.3s ease;
+
+        .btn-custom {
+            border-radius: 12px;
+            padding: 10px 25px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
         }
-        .service-card:hover .display-4 {
-            transform: scale(1.1);
-        }
+
+        /* Couleurs spécifiques par catégorie */
+        .bg-soft-primary { background-color: #e7f1ff; color: #0d6efd; }
+        .bg-soft-info { background-color: #e0f7fa; color: #0dcaf0; }
+        .bg-soft-success { background-color: #e8f5e9; color: #198754; }
+        .bg-soft-danger { background-color: #ffebee; color: #dc3545; }
+
     </style>
 </head>
 <body>
     <div layout:fragment="content1">
-        <div class="bg-primary text-white py-5 mb-5 shadow-sm">
-            <div class="container text-center text-md-start">
-                <h1 class="display-4 fw-bold mb-3">DirectPost</h1>
-                <p class="lead">Bienvenue à La Poste Tunisienne - Votre solution complète de services postaux</p>
+        
+        <div class="hero-section text-white shadow-lg">
+            <div class="container text-center">
+                <h1 class="display-3 fw-black mb-2">DirectPost</h1>
+                <p class="lead opacity-75">Simplifiez vos démarches avec La Poste Tunisienne</p>
             </div>
         </div>
 
-        <div class="container mb-5">
-            <div class="row g-4">
+        <div class="container pb-5">
+            <div class="row g-4 mt-0">
                 
                 <div class="col-md-6 col-lg-3">
-                    <div class="card h-100 shadow-sm border-0 service-card">
-                        <div class="card-body text-center service-content">
-                            <i class="bi bi-truck display-4 text-primary mb-3"></i>
-                            <h5 class="card-title fw-bold">EMS National</h5>
-                            <p class="card-text text-muted small">Expédition rapide et sécurisée partout en Tunisie</p>
+                    <div class="card h-100 service-card p-4">
+                        <div class="card-body text-center">
+                            <div class="icon-box bg-soft-primary">
+                                <i class="bi bi-box-seam fs-1"></i>
+                            </div>
+                            <h5 class="fw-bold mb-3">Dépôt Passager</h5>
+                            <p class="text-muted small">Expédition rapide de vos colis sans abonnement.</p>
                             <div class="service-overlay">
-                                <a th:href="@{/passenger/national}" class="btn btn-primary w-75 shadow-sm">Dépôt Passager</a>
-                                <a th:href="@{/subscribed}" class="btn btn-outline-primary w-75">Dépôt Abonné</a>
+                                <a th:href="@{/passenger/national}" class="btn btn-primary btn-custom shadow">Accéder</a>
                             </div>
                         </div>
                     </div>
                 </div>
 
                 <div class="col-md-6 col-lg-3">
-                    <div class="card h-100 shadow-sm border-0 service-card">
-                        <div class="card-body text-center service-content">
-                            <i class="bi bi-airplane-engines display-4 text-info mb-3"></i>
-                            <h5 class="card-title fw-bold">EMS International</h5>
-                            <p class="card-text text-muted small">Vos colis livrés dans le monde entier en un temps record</p>
+                    <div class="card h-100 service-card p-4">
+                        <div class="card-body text-center">
+                            <div class="icon-box bg-soft-info">
+                                <i class="bi bi-person-badge fs-1"></i>
+                            </div>
+                            <h5 class="fw-bold mb-3">Dépôt Abonnés</h5>
+                            <p class="text-muted small">Services exclusifs pour nos clients partenaires.</p>
                             <div class="service-overlay">
-                                <a href="#" class="btn btn-info text-white w-75 shadow-sm">Dépôt Passager</a>
-                                <a href="#" class="btn btn-outline-info w-75">Dépôt Abonné</a>
+                                <a href="#" class="btn btn-info text-white btn-custom shadow">Accéder</a>
                             </div>
                         </div>
                     </div>
                 </div>
 
-               <div class="col-md-6 col-lg-3">
-    <div class="card h-100 shadow-sm border-0 service-card">
-        <div class="card-body text-center service-content">
-            <i class="bi bi-shield-check display-4 text-success mb-3"></i>
-            <h5 class="card-title fw-bold">RPPI</h5>
-            <p class="card-text text-muted small">Service Premium : Envois personnalisés et sécurisés à l'international</p>
-            <div class="service-overlay">
-                <a href="#" class="btn btn-success w-75 shadow-sm">Dépôt Passager</a>
-                <a href="#" class="btn btn-outline-success w-75">Dépôt Abonné</a>
-            </div>
-        </div>
-    </div>
-</div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="card h-100 service-card p-4">
+                        <div class="card-body text-center">
+                            <div class="icon-box bg-soft-success">
+                                <i class="bi bi-truck fs-1"></i>
+                            </div>
+                            <h5 class="fw-bold mb-3">Collecte</h5>
+                            <p class="text-muted small">Demandez le ramassage de vos envois à domicile.</p>
+                            <div class="service-overlay">
+                                <a href="#" class="btn btn-success btn-custom shadow">Accéder</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
                 <div class="col-md-6 col-lg-3">
-                    <div class="card h-100 shadow-sm border-0 service-card">
-                        <div class="card-body text-center service-content">
-                            <i class="bi bi-flower1 display-4 text-danger mb-3"></i>
-                            <h5 class="card-title fw-bold">Fleurs de Poste</h5>
-                            <p class="card-text text-muted small">Envoyez des émotions avec nos bouquets à l'international</p>
+                    <div class="card h-100 service-card p-4">
+                        <div class="card-body text-center">
+                            <div class="icon-box bg-soft-danger">
+                                <i class="bi bi-credit-card fs-1"></i>
+                            </div>
+                            <h5 class="fw-bold mb-3">Factures</h5>
+                            <p class="text-muted small">Consultez et réglez vos factures en toute sécurité.</p>
                             <div class="service-overlay">
-                                <a href="#" class="btn btn-danger w-75 shadow-sm">Dépôt Passager</a>
-                                <a href="#" class="btn btn-outline-danger w-75">Dépôt Abonné</a>
+                                <a href="#" class="btn btn-danger btn-custom shadow">Accéder</a>
                             </div>
                         </div>
                     </div>

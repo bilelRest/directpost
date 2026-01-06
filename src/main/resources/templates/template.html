@@ -4,464 +4,332 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=0.5">
-    <link rel="stylesheet" href="/webjars/bootstrap/5.3.3/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/webjars/bootstrap-icons/1.10.5/font/bootstrap-icons.css">
-    <script src="/webjars/bootstrap/5.3.3/js/bootstrap.bundle.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.3/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap-icons/1.10.5/font/bootstrap-icons.css}">
+    <script th:src="@{/webjars/bootstrap/5.3.3/js/bootstrap.bundle.min.js}"></script>
 
-    <title>LA POSTE TUNISIENNE-DirectPOST</title>
+    <title>DirectPOST - La Poste Tunisienne</title>
+    
     <style>
         :root {
-            --primary-color: #4361ee;
-            --secondary-color: #3a0ca3;
-            --accent-color: #4cc9f0;
-            --success-color: #4bb543;
-            --warning-color: #f72585;
-            --light-color: #f8f9fa;
-            --dark-color: #212529;
-            --gradient-primary: linear-gradient(135deg, #4361ee 0%, #3a0ca3 100%);
-            --gradient-accent: linear-gradient(135deg, #4cc9f0 0%, #4895ef 100%);
-            --shadow-soft: 0 4px 20px rgba(0, 0, 0, 0.08);
-            --shadow-medium: 0 8px 30px rgba(0, 0, 0, 0.12);
+            --postal-blue: #0056b3;
+            --postal-dark: #003d7a;
+            --postal-yellow: #ffc107;
+            --bg-light: #f4f7f6;
+            --glass-white: rgba(255, 255, 255, 0.95);
+            --shadow-sm: 0 2px 10px rgba(0,0,0,0.05);
+            --shadow-lg: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        /* SUPPRIMER LES MARGES ET PADDING PAR DÉFAUT */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
         body {
-            background: linear-gradient(135deg, #f5f7fa 0%, #e3f2fd 100%);
-            min-height: 100vh;
+            background-color: var(--bg-light);
             font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            color: #333;
+            overflow-x: hidden;
+            min-height: 100vh;
         }
 
+        /* NAVBAR - Même style mais sans container-fluid restrictif */
         .navbar-custom {
-            background: var(--gradient-primary);
-            box-shadow: var(--shadow-soft);
-            backdrop-filter: blur(10px);
+            background: linear-gradient(90deg, var(--postal-dark) 0%, var(--postal-blue) 100%);
+            padding: 0.8rem 0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar-content {
+            max-width: 100%;
+            margin: 0;
+            padding: 0 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
         }
 
         .platform-title {
-            font-weight: 700;
-            letter-spacing: 0.5px;
-            background: linear-gradient(45deg, #ffffff, #e0f7fa);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .btn-outline-custom {
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            color: white;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            transition: all 0.3s ease;
-        }
-
-        .btn-outline-custom:hover {
-            background: rgba(255, 255, 255, 0.2);
-            border-color: rgba(255, 255, 255, 0.5);
-            transform: translateY(-2px);
-        }
-
-        .user-badge {
-            background: rgba(255, 255, 255, 0.15);
-            border-radius: 25px;
-            padding: 0.5rem 1rem;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-
-        .header-divider {
-            height: 4px;
-            background: linear-gradient(to right, var(--primary-color), var(--accent-color), var(--warning-color));
-            margin: 0;
-            opacity: 0.8;
-        }
-
-        /* Offcanvas Styles */
-        #offcanvasMenu {
-            width: 320px;
-            background: var(--gradient-primary);
-            border-right: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .offcanvas-header {
-            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-            background: rgba(0, 0, 0, 0.1);
-        }
-
-        .nav-item a {
+            font-weight: 800;
+            font-size: 1.25rem;
             color: white !important;
-            border-radius: 12px;
-            margin: 6px 0;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            border: 1px solid transparent;
+            letter-spacing: 1px;
+            text-decoration: none;
         }
 
-        .nav-item a:hover {
-            background: rgba(255, 255, 255, 0.15);
-            border-color: rgba(255, 255, 255, 0.3);
-            transform: translateX(8px) scale(1.02);
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        .platform-title span {
+            color: var(--postal-yellow);
         }
 
-        .nav-item a i {
-            color: var(--accent-color);
-            transition: all 0.3s ease;
+        /* CONTAINER PRINCIPAL SANS RESTRICTIONS */
+        .main-container {
+            width: 100%;
+            max-width: 100%;
+            margin: 0;
+            padding: 0;
         }
 
-        .nav-item a:hover i {
-            transform: scale(1.1);
+        /* CONTENU PRINCIPAL - UTILISE TOUTE LA LARGEUR */
+        .main-content-area {
+            width: 100%;
+            padding: 20px 15px;
+            animation: fadeIn 0.6s ease-out;
         }
 
-        .sub-menu {
-            background: rgba(0, 0, 0, 0.1);
-            border-left: 4px solid var(--accent-color);
-            border-radius: 0 12px 12px 0;
-            margin-left: 1rem;
-            backdrop-filter: blur(10px);
+        /* Pour les grands écrans */
+        @media (min-width: 768px) {
+            .main-content-area {
+                padding: 30px 25px;
+            }
         }
 
-        .active-menu-item {
-            background: linear-gradient(135deg, var(--accent-color), var(--primary-color)) !important;
-            border-color: rgba(255, 255, 255, 0.4) !important;
-            box-shadow: 0 4px 15px rgba(76, 201, 240, 0.3);
+        @media (min-width: 1200px) {
+            .main-content-area {
+                padding: 40px 50px;
+            }
         }
 
-        /* Main Content Area */
-        .content-wrapper {
-            min-height: calc(100vh - 120px);
-            padding: 2rem 0;
+        @media (min-width: 1600px) {
+            .main-content-area {
+                padding: 50px 100px;
+            }
         }
 
+        /* CARTE DE CONTENU ÉLARGIE */
         .content-card {
             background: white;
             border-radius: 20px;
-            box-shadow: var(--shadow-medium);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(10px);
+            border: none;
+            box-shadow: var(--shadow-lg);
             overflow: hidden;
+            width: 100%;
+            max-width: 100%;
+            margin: 0;
         }
 
         .content-header {
-            background: var(--gradient-primary);
-            color: white;
+            background: white;
+            border-bottom: 2px solid #f0f0f0;
             padding: 2rem;
             text-align: center;
         }
 
-        .content-header h1 {
-            font-weight: 700;
+        .header-accent {
+            width: 60px;
+            height: 4px;
+            background: var(--postal-yellow);
+            margin: 15px auto;
+            border-radius: 2px;
+        }
+
+        /* CONTENU DÉPOSÉ PAR LES PAGES ENFANTS */
+        .fragment-content {
+            width: 100%;
+            padding: 2rem;
+        }
+
+        /* HERO BACKGROUND - PLUS ÉTROIT */
+        .hero-bg {
+            background: var(--postal-blue);
+            height: 40px;
+            width: 100%;
             margin: 0;
-            font-size: 2.2rem;
         }
 
-        .content-header p {
-            opacity: 0.9;
-            margin: 0.5rem 0 0;
-            font-size: 1.1rem;
+        /* OFF CANVAS - Même style */
+        #offcanvasMenu {
+            background: white;
+            border-right: none;
+            box-shadow: 5px 0 25px rgba(0,0,0,0.1);
+            width: 280px;
         }
 
-        /* Animation pour les menus */
-        @keyframes slideIn {
-            from {
-                opacity: 0;
-                transform: translateY(-10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        .offcanvas-header {
+            background: var(--postal-dark);
+            color: white;
+        }
+
+        .nav-link-custom {
+            color: #444 !important;
+            padding: 12px 20px;
+            border-radius: 10px;
+            margin: 4px 15px;
+            display: flex;
+            align-items: center;
+            transition: all 0.2s ease;
+            font-weight: 500;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .nav-link-custom i {
+            font-size: 1.2rem;
+            margin-right: 15px;
+            color: var(--postal-blue);
+        }
+
+        .nav-link-custom:hover, .nav-link-custom.active-menu-item {
+            background: #eef2ff;
+            color: var(--postal-blue) !important;
+            transform: translateX(5px);
+        }
+
+        .active-menu-item {
+            background: var(--postal-blue) !important;
+            color: white !important;
+        }
+        
+        .active-menu-item i { 
+            color: white; 
+        }
+
+        /* UTILITIES */
+        .user-badge {
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255,255,255,0.3);
+            border-radius: 50px;
+            padding: 5px 15px;
+            color: white;
         }
 
         .sub-menu {
-            animation: slideIn 0.3s ease-out;
+            background: #fafafa;
+            border-radius: 10px;
+            margin: 5px 25px;
+            padding: 5px 0;
+            border-left: 3px solid var(--postal-yellow);
         }
 
-        /* Boutons modernes */
-        .btn-modern {
-            background: var(--gradient-primary);
-            border: none;
-            border-radius: 12px;
-            padding: 0.75rem 1.5rem;
-            color: white;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(67, 97, 238, 0.3);
-        }
-
-        .btn-modern:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(67, 97, 238, 0.4);
-            color: white;
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .platform-title {
-                font-size: 1.1rem;
-            }
-
-            .content-header h1 {
-                font-size: 1.8rem;
-            }
-
-            .content-header {
-                padding: 1.5rem;
-            }
-        }
-
-        /* Effets de glassmorphisme */
-        .glass-effect {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-
-        /* Loading animation */
-        @keyframes pulse {
-            0% { opacity: 1; }
-            50% { opacity: 0.7; }
-            100% { opacity: 1; }
-        }
-
-        .loading {
-            animation: pulse 2s infinite;
+        /* ANIMATIONS */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
     </style>
 </head>
 
 <body>
-<!-- Navigation Bar -->
-<nav class="navbar navbar-expand-lg navbar-custom sticky-top">
-    <div class="container-fluid">
-        <!-- Menu Button -->
-        <button title="Afficher le menu" class="btn btn-outline-custom me-auto" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasMenu">
-            <i class="bi bi-list fs-5"></i>
-        </button>
+    <!-- NAVBAR SIMPLIFIÉE SANS CONTAINER RESTRICTIF -->
+    <nav class="navbar-custom">
+        <div class="navbar-content">
+            <button class="btn text-white me-3" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasMenu">
+                <i class="bi bi-grid-3x3-gap-fill fs-4"></i>
+            </button>
 
-        <!-- Platform Title -->
-        <div class="text-center flex-grow-1">
-            <h3 class="platform-title mb-0">
-                LA POSTE TUNISIENNE-DirectPOST
-                <i class="bi bi-send-check-fill me-2"></i>
-
-            </h3>
-        </div>
-        <div class="me-auto">
-            <a href="/" class="btn btn-outline-light" type="button" >
-                <i class="bi bi-home"></i>
-                Accueil
+            <a class="platform-title" href="/">
+                DIRECT<span>POST</span>
             </a>
-        </div>
 
-        <!-- User Zone -->
-        <div class="d-flex align-items-center gap-3">
-            <div class="user-badge d-flex align-items-center gap-2">
-                <i class="bi bi-person-circle fs-5 text-accent"></i>
-                <span class="text-white fw-semibold" th:text="${logged}">Utilisateur</span>
-            </div>
-
-            <form th:action="@{#}" method="get" class="d-inline">
-                <button title="Déconnexion" type="submit" class="btn btn-outline-custom btn-sm">
-                    <i class="bi bi-box-arrow-right fs-6"></i>
-                </button>
-            </form>
-        </div>
-    </div>
-    <div class="header-divider"></div>
-</nav>
-
-<!-- Offcanvas Menu -->
-<div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasMenu" aria-labelledby="offcanvasMenuLabel">
-    <div class="offcanvas-header">
-        <h5 class="offcanvas-title text-white" id="offcanvasMenuLabel">
-            <i class="bi bi-menu-button-wide-fill text-accent me-2"></i>
-            Navigation
-        </h5>
-        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-    </div>
-    <div class="offcanvas-body p-0">
-        <ul class="nav flex-column p-3">
-            <!-- Menu Principal Dépôt Passager -->
-            <li class="nav-item">
-                <a class="nav-link text-light py-3 active-menu-item" href="/passenger">
-                    <i class="bi bi-box-seam me-3 fs-5"></i>
-                    Dépôt Passager
-                </a>
-            </li>
-
-            <!-- Section Colis -->
-            <li class="nav-item">
-                <a class="nav-link text-light py-3" style="cursor: pointer;" onclick="toggleMenu('colisMenu')">
-                    <i class="bi bi-package me-3 fs-5"></i>
-                    Gestion Colis
-                    <i class="bi bi-chevron-down float-end mt-1"></i>
-                </a>
-            </li>
-
-            <div id="colisMenu" class="sub-menu ms-4 mb-2" style="display:none;">
-                <ul class="nav flex-column">
-                    <li class="nav-item">
-                        <a class="nav-link text-light py-2" href="/suivie">
-                            <i class="bi bi-search me-2"></i>
-                            Suivi Colis
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-light py-2" href="#">
-                            <i class="bi bi-clock-history me-2"></i>
-                            Historique
-                        </a>
-                    </li>
-                </ul>
-            </div>
-
-            <!-- Section Rapports -->
-            <li class="nav-item">
-                <a class="nav-link text-light py-3" style="cursor: pointer;" onclick="toggleMenu('rapportsMenu')">
-                    <i class="bi bi-graph-up me-3 fs-5"></i>
-                    Rapports
-                    <i class="bi bi-chevron-down float-end mt-1"></i>
-                </a>
-            </li>
-
-            <div id="rapportsMenu" class="sub-menu ms-4 mb-2" style="display:none;">
-                <ul class="nav flex-column">
-                    <li class="nav-item">
-                        <a class="nav-link text-light py-2" href="#">
-                            <i class="bi bi-bar-chart me-2"></i>
-                            Statistiques
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-light py-2" href="#">
-                            <i class="bi bi-download me-2"></i>
-                            Exports
-                        </a>
-                    </li>
-                </ul>
-            </div>
-
-            <!-- Section Administration -->
-            <li th:if="${isAdmin}" class="nav-item">
-                <a class="nav-link text-light py-3" style="cursor: pointer;" onclick="toggleMenu('adminMenu')">
-                    <i class="bi bi-shield-check me-3 fs-5"></i>
-                    Administration
-                    <i class="bi bi-chevron-down float-end mt-1"></i>
-                </a>
-            </li>
-
-            <div id="adminMenu" class="sub-menu ms-4 mb-2" style="display:none;">
-                <ul class="nav flex-column">
-                    <li class="nav-item">
-                        <a class="nav-link text-light py-2" href="#">
-                            <i class="bi bi-people me-2"></i>
-                            Utilisateurs
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-light py-2" href="#">
-                            <i class="bi bi-gear me-2"></i>
-                            Paramètres
-                        </a>
-                    </li>
-                </ul>
-            </div>
-
-            <!-- Retour Accueil -->
-            <li class="nav-item mt-4">
-                <a class="nav-link text-light py-3" href="#">
-                    <i class="bi bi-house-door me-3 fs-5"></i>
-                    Retour Accueil
-                </a>
-            </li>
-        </ul>
-    </div>
-</div>
-
-<!-- Main Content -->
-<div class="container-fluid content-wrapper">
-    <div class="container">
-        <div layout:fragment="content1">
-            <!-- Le contenu du formulaire de dépôt passager sera injecté ici -->
-            <div class="content-card">
-                <div class="content-header">
-                    <h1><i class="bi bi-send-check me-2"></i>Dépôt Passager</h1>
-                    <p>Service d'envoi de colis simple et sécurisé</p>
+            <div class="d-flex align-items-center gap-3">
+                <div class="user-badge d-none d-md-flex align-items-center gap-2">
+                    <i class="bi bi-person-circle"></i>
+                    <span th:text="${logged}">Admin</span>
                 </div>
-                <div class="p-4">
-                    <!-- Le formulaire sera injecté ici par Thymeleaf -->
-                    <div class="text-center py-5">
-                        <div class="loading">
-                            <i class="bi bi-arrow-repeat fs-1 text-primary"></i>
-                            <p class="mt-3 text-muted">Chargement du formulaire...</p>
+                <a href="/" class="btn btn-sm btn-outline-light rounded-pill px-3">
+                    <i class="bi bi-house"></i>
+                </a>
+                <form th:action="@{/logout}" method="post" class="m-0">
+                    <button type="submit" class="btn btn-sm btn-light rounded-pill px-3">
+                        <i class="bi bi-power text-danger"></i>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO MINIMAL -->
+    <div class="hero-bg"></div>
+
+    <!-- CONTENU PRINCIPAL SANS RESTRICTIONS -->
+    <div class="main-container">
+        <div class="main-content-area">
+            <div class="content-card">
+                <div layout:fragment="content1">
+                    <div class="content-header">
+                        <i class="bi bi-box-seam text-primary display-4"></i>
+                        <h1 class="fw-bold mt-2">Dépôt Passager</h1>
+                        <div class="header-accent"></div>
+                        <p class="text-muted">Enregistrez un nouvel envoi national ou international</p>
+                    </div>
+
+                    <div class="fragment-content">
+                        <!-- LE CONTENU DES PAGES ENFANTS SERA INJECTÉ ICI -->
+                        <div class="text-center py-5">
+                            <div class="spinner-border text-primary" role="status"></div>
+                            <p class="mt-3 text-muted">Chargement du service...</p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
-<script>
-    // Fonction unique pour gérer tous les menus
-    function toggleMenu(menuId) {
-        const menu = document.getElementById(menuId);
-        const isVisible = menu.style.display === "block";
+    <!-- OFF CANVAS MENU -->
+    <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasMenu">
+        <div class="offcanvas-header">
+            <h5 class="mb-0"><i class="bi bi-speedometer2 me-2"></i> Menu Principal</h5>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"></button>
+        </div>
+        <div class="offcanvas-body p-0 pt-3">
+            <ul class="nav flex-column">
+                <li>
+                    <a class="nav-link-custom active-menu-item" href="/passenger">
+                        <i class="bi bi-box-seam"></i> Dépôt Passager
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="nav-link-custom" style="cursor: pointer;" onclick="toggleMenu('colisMenu')">
+                        <i class="bi bi-truck"></i> Gestion Colis
+                        <i class="bi bi-chevron-down ms-auto"></i>
+                    </a>
+                    <div id="colisMenu" class="sub-menu" style="display:none;">
+                        <a class="nav-link-custom py-2" href="/suivie"><i class="bi bi-search"></i> Suivi</a>
+                        <a class="nav-link-custom py-2" href="#"><i class="bi bi-clock-history"></i> Historique</a>
+                    </div>
+                </li>
 
-        // Fermer tous les autres menus
-        document.querySelectorAll('.sub-menu').forEach(subMenu => {
-            if (subMenu.id !== menuId) {
-                subMenu.style.display = "none";
+                <li th:if="${isAdmin}">
+                    <a class="nav-link-custom" style="cursor: pointer;" onclick="toggleMenu('adminMenu')">
+                        <i class="bi bi-shield-lock"></i> Administration
+                        <i class="bi bi-chevron-down ms-auto"></i>
+                    </a>
+                    <div id="adminMenu" class="sub-menu" style="display:none;">
+                        <a class="nav-link-custom py-2" href="#"><i class="bi bi-people"></i> Utilisateurs</a>
+                        <a class="nav-link-custom py-2" href="#"><i class="bi bi-gear"></i> Paramètres</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        function toggleMenu(menuId) {
+            const menu = document.getElementById(menuId);
+            const allMenus = document.querySelectorAll('.sub-menu');
+            const isVisible = menu.style.display === "block";
+
+            allMenus.forEach(m => m.style.display = "none");
+            menu.style.display = isVisible ? "none" : "block";
+        }
+
+        // Focus management pour améliorer l'accessibilité
+        document.addEventListener('DOMContentLoaded', function() {
+            const offcanvas = document.getElementById('offcanvasMenu');
+            if (offcanvas) {
+                offcanvas.addEventListener('shown.bs.offcanvas', function () {
+                    const firstLink = this.querySelector('.nav-link-custom');
+                    if (firstLink) firstLink.focus();
+                });
             }
         });
-
-        // Basculer le menu actuel
-        menu.style.display = isVisible ? "none" : "block";
-
-        // Animation des icônes
-        const icon = menu.previousElementSibling.querySelector('.bi-chevron-down');
-        if (icon) {
-            icon.style.transform = isVisible ? 'rotate(0deg)' : 'rotate(180deg)';
-            icon.style.transition = 'transform 0.3s ease';
-        }
-    }
-
-    // Gestion des clics sur les liens du menu
-    document.addEventListener('DOMContentLoaded', function() {
-        const navLinks = document.querySelectorAll('.nav-link');
-
-        navLinks.forEach(link => {
-            link.addEventListener('click', function(e) {
-                if (!this.getAttribute('onclick')) {
-                    // Retirer la classe active de tous les liens
-                    navLinks.forEach(l => l.classList.remove('active-menu-item'));
-                    // Ajouter la classe active au lien cliqué
-                    this.classList.add('active-menu-item');
-                }
-            });
-        });
-
-        // Fermer le menu offcanvas après clic sur un lien (mobile)
-        const offcanvas = document.getElementById('offcanvasMenu');
-        const offcanvasInstance = bootstrap.Offcanvas.getInstance(offcanvas);
-
-        navLinks.forEach(link => {
-            link.addEventListener('click', function() {
-                if (window.innerWidth < 992 && offcanvasInstance) {
-                    offcanvasInstance.hide();
-                }
-            });
-        });
-    });
-
-    // Animation au chargement de la page
-    window.addEventListener('load', function() {
-        document.body.style.opacity = '0';
-        document.body.style.transition = 'opacity 0.5s ease';
-
-        setTimeout(() => {
-            document.body.style.opacity = '1';
-        }, 100);
-    });
-</script>
+    </script>
 </body>
 </html>
