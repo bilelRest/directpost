@@ -16,12 +16,17 @@ public class Sender {
     private String adress;
     private Long postalCode;
     private String city;
-    public Sender(String sendName, String sendSocialReason, Long sendTel, String adress, Long postalCode, String city) {
+    private String country;
+    private String sendEmail;
+    public Sender(String sendName, String sendSocialReason, Long sendTel, String adress, Long postalCode, String city, String country, String sendEmail) {
         this.sendName = sendName;
         this.sendSocialReason = sendSocialReason;
         this.sendTel = sendTel;
         this.adress = adress;
         this.postalCode = postalCode;
+        this.city = city;
+        this.country = country;
+        this.sendEmail = sendEmail;
     }
 
     public Sender() {
@@ -81,5 +86,21 @@ public class Sender {
 
     public void setCity(String city) {
         this.city = city;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public String getSendEmail() {
+        return sendEmail;
+    }
+
+    public void setSendEmail(String sendEmail) {
+        this.sendEmail = sendEmail;
     }
 }

@@ -11,18 +11,21 @@
 <body>
 <div layout:fragment="content1">
     <div class="container-fluid mb-0 p-0">
-  <form autocomplete="off" id="deliveryForm" class="w-100">
+ <form autocomplete="off" id="deliveryForm" class="w-100">
     <div class="card shadow-sm border-0 mb-2 border-start border-primary border-4">
         <div class="card-header border-0 py-1 bg-primary d-flex align-items-center">
             <h6 class="mb-0 text-light fw-bold" style="font-size: 0.8rem;"><i class="bi bi-person-up me-1"></i>EXPÉDITEUR</h6>
         </div>
         <div class="card-body py-2">
             <div class="row g-1">
-                <div class="col-md-2"><input id="senderTel" name="sender.sendTel" type="tel" class="form-control form-control-sm" placeholder="Téléphone" onchange="checkclient()"></div>
-                <div class="col-md-3"><input id="senderName" name="sender.sendName" type="text" class="form-control form-control-sm" placeholder="Nom Complet"></div>
-                <div class="col-md-4"><input id="senderAdress" name="sender.adress" type="text" class="form-control form-control-sm" placeholder="Adresse"></div>
-                <div class="col-md-2"><input id="senderVille" name="sender.ville" type="text" class="form-control form-control-sm" placeholder="Ville"></div>
-                <div class="col-md-1"><input value="Tunisie" class="form-control form-control-sm bg-light" readonly></div>
+                <div class="col-md-2"><label for="senderTel">Téléphone</label><input id="senderTel" name="sender.sendTel" type="tel" class="form-control form-control-sm" placeholder="Téléphone" onchange="checkclient()"></div>
+                <div class="col-md-3"><label for="senderName">Nom Complet</label><input id="senderName" name="sender.sendName" type="text" class="form-control form-control-sm" placeholder="Nom Complet"></div>
+                <div class="col-md-3"><label for="sendSocialReason">Raison Sociale</label><input id="sendSocialReason" name="sender.sendSocialReason" type="text" class="form-control form-control-sm" placeholder="Raison Sociale"></div>
+                <div class="col-md-4"><label for="senderAdress">Adresse</label><input id="senderAdress" name="sender.adress" type="text" class="form-control form-control-sm" placeholder="Adresse"></div>
+                <div class="col-md-2"><label for="senderVille">Ville</label><input id="senderVille" name="sender.city" type="text" class="form-control form-control-sm" placeholder="Ville"></div>
+                 <div class="col-md-2"><label for="sendEmail">Email</label><input id="sendEmail" name="sender.sendEmail" type="email" class="form-control form-control-sm" placeholder="Email"></div>
+                <div class="col-md-2"><label for="senderPostal">Code Postal</label><input id="senderPostal" name="sender.postalCode" type="text" class="form-control form-control-sm" placeholder="CP"></div>
+                <div class="col-md-1"><label for="senderCountry">Pays</label><input id="senderCountry" name="sender.country" value="Tunisie" class="form-control form-control-sm bg-light" readonly></div>
             </div>
         </div>
     </div>
@@ -34,16 +37,25 @@
         <div class="card-body py-2">
             <div class="row g-1">
                 <div class="col-md-1">
+                    <label for="recCountry">Pays</label>
                     <select id="recCountry" name="receiver.country" class="form-select form-select-sm" onchange="toggleCountryLogic()">
                         <option value="Tunisie" selected>Tunisie</option>
-                        <option value="Autre">Autre</option>
+                        <option value="Algeria">Algérie</option>
+                        <option value="Qatar">Qatar</option>
+                        <option value="France">France</option>
+                        <option value="Canada">Canada</option>
+                        <option value="Ukraine">Ukraine</option>
+                        <option value="Brazil">Brésil</option>
+                        <option value="China">Chine</option>
                     </select>
                 </div>
-                <div class="col-md-2"><input id="receiverName" name="receiver.recName" type="text" class="form-control form-control-sm" placeholder="Nom" required></div>
-                <div class="col-md-3"><input id="receiverAdress" name="receiver.adress" type="text" class="form-control form-control-sm" placeholder="Adresse" required></div>
-                <div class="col-md-2"><input id="receiverVille" name="receiver.ville" type="text" class="form-control form-control-sm" placeholder="Ville" required></div>
-                <div class="col-md-2"><input id="receiverTel" name="receiver.recTel" type="tel" class="form-control form-control-sm" placeholder="Téléphone" required></div>
-                <div class="col-md-2"><input id="receiverPostal" name="receiver.postalCode" type="text" class="form-control form-control-sm" placeholder="CP"></div>
+                <div class="col-md-2"><label for="receiverName">Nom et Prénom</label> <input id="receiverName" name="receiver.recName" type="text" class="form-control form-control-sm" placeholder="Nom" required></div>
+                <div class="col-md-2"><label for="recSocialraison">Raison Sociale</label><input id="recSocialraison" name="receiver.recSocialReason" type="text" class="form-control form-control-sm" placeholder="Raison Sociale"></div>
+                <div class="col-md-3"><label for="receiverAdress">Adresse</label><input id="receiverAdress" name="receiver.adress" type="text" class="form-control form-control-sm" placeholder="Adresse" required></div>
+                <div class="col-md-2"><label for="receiverVille">Ville</label><input id="receiverVille" name="receiver.ville" type="text" class="form-control form-control-sm" placeholder="Ville" required></div>
+                <div class="col-md-2"><label for="receiverTel">Téléphone</label><input id="receiverTel" name="receiver.recTel" type="tel" class="form-control form-control-sm" placeholder="Téléphone" ></div>
+                <div class="col-md-2"><label for="receiverMail">Email</label><input id="receiverMail" name="receiver.recEmail" type="email" class="form-control form-control-sm" placeholder="Email" ></div>
+                <div class="col-md-2"><label for="receiverPostal">Code Postal</label><input id="receiverPostal" name="receiver.postalCode" type="text" class="form-control form-control-sm" placeholder="CP"></div>
             </div>
         </div>
     </div>
@@ -67,7 +79,7 @@
                     </div>
                 </div>
 
-                <div class="col-md-2 d-none" id="typeappelofre">
+                <div class="col-md-2" id="typeappelofre">
                     <select id="itemTypeoffre" name="typeOffre" class="form-select form-select-sm border-primary">
                         <option value="Normal">Normal</option>
                         <option value="Appel">Appel d'offre</option>
@@ -82,14 +94,16 @@
 
                 <div id="dimensionsContainer" class="col-md-2 d-none">
                     <div class="input-group input-group-sm">
-                        <input id="longeur" name="dimL" type="number" class="form-control px-1" placeholder="L" oninput="calculerprix()">
-                        <input id="largeur" name="dimW" type="number" class="form-control px-1" placeholder="W" oninput="calculerprix()">
-                        <input id="hauteur" name="dimH" type="number" class="form-control px-1" placeholder="H" oninput="calculerprix()">
+                        <!-- NOMS CORRIGÉS pour correspondre à l'entité Parcel -->
+                        <input id="longeur" name="lenght" type="number" class="form-control px-1" placeholder="L">
+                        <input id="largeur" name="width" type="number" class="form-control px-1" placeholder="W">
+                        <input id="hauteur" name="height" type="number" class="form-control px-1" placeholder="H">
                     </div>
                 </div>
 
                 <div class="col-md-1">
                     <div class="input-group input-group-sm">
+                        <!-- name="weight" correspond à private Double weight; -->
                         <input oninput="calculerprix()" type="number" step="0.1" name="weight" id="parcelWeight" class="form-control border-primary fw-bold" placeholder="KG">
                         <span class="input-group-text bg-primary text-white p-1">KG</span>
                     </div>
@@ -102,7 +116,12 @@
                 </div>
 
                 <div class="col-md-2 d-flex align-items-center justify-content-end">
+                    <!-- CHAMP CACHÉ POUR LE PRIX - name="price" correspond à private Double price; -->
+                    <input type="hidden" id="parcelPrice" name="price" value="0">
+                    
+                    <!-- Affichage visuel du prix -->
                     <span id="pricezone" class="fw-bold text-primary me-2">0.000 DT</span>
+                    
                     <button type="button" id="btnValider" onclick="validerEtImprimer()" class="btn btn-success btn-sm px-3 fw-bold shadow-sm">VALIDER</button>
                 </div>
             </div>
@@ -130,11 +149,17 @@
         <div class="row mt-5" id="sessionContainer" style="display:none;">
             <div class="col-12">
                 <div class="card shadow border-0">
-                    <div class="card-header bg-dark text-white d-flex justify-content-between align-items-center py-3">
+                    <div class="card-header bg-light text-dark d-flex justify-content-between align-items-center py-3">
                         <h5 class="mb-0 fw-bold"><i class="bi bi-collection me-2 text-warning"></i>Session en cours</h5>
+                        
+                        <button type="button" class="btn btn-info btn-lg px-5 shadow" onclick="imprimerBordereauFinal()">
+                            <i class="bi bi-printer-fill me-2"></i>Imprimer le Bordereau de Session
+                        </button>
+                    
                         <span class="badge bg-primary px-3 py-2 fs-6" id="colisCount">0 Colis</span>
                     </div>
                     <div class="card-body p-0">
+                         
                         <div class="table-responsive">
                             <table class="table table-hover align-middle mb-0" id="sessionTable">
                                 <thead class="table-light">
@@ -159,11 +184,7 @@
                             </table>
                         </div>
                     </div>
-                    <div class="card-footer text-center py-3">
-                        <button type="button" class="btn btn-success btn-lg px-5 shadow" onclick="imprimerBordereauFinal()">
-                            <i class="bi bi-printer-fill me-2"></i>Imprimer le Bordereau de Session
-                        </button>
-                    </div>
+                   
                 </div>
             </div>
         </div>
@@ -210,6 +231,16 @@ async function validerEtImprimer() {
         return;
     }
 
+    // VALIDATION SPÉCIFIQUE : S'assurer qu'un prix a été calculé
+    const priceHiddenField = document.getElementById('parcelPrice');
+    const priceValue = parseFloat(priceHiddenField.value) || 0;
+    
+    if (priceValue <= 0) {
+        alert("Veuillez d'abord calculer le prix en saisissant/changant le poids (KG)");
+        weightInput.focus();
+        return;
+    }
+
     const form = document.getElementById('deliveryForm');
     const formData = new FormData(form);
     
@@ -223,9 +254,15 @@ async function validerEtImprimer() {
     formData.append('service', serviceActif);
     formData.append('paymentMode', 'Espèces');
     
-    // Ajout manuel du prix calculé pour le backend
-    const priceZone = document.getElementById('pricezone').innerText;
-    formData.append('calculatedPrice', priceZone.replace(' DT', ''));
+    // CORRECTION ICI : Utiliser le champ caché au lieu du span
+    formData.append('calculatedPrice', priceValue.toFixed(3));
+    
+    // DEBUG : Afficher toutes les données envoyées
+    console.log("=== DONNÉES ENVOYÉES AU BACKEND ===");
+    for (let [key, value] of formData.entries()) {
+        console.log(`${key}: ${value}`);
+    }
+    console.log("Prix envoyé (depuis champ caché):", priceValue);
 
     try {
         console.log("Envoi en cours...");
@@ -246,17 +283,33 @@ async function validerEtImprimer() {
         const fieldsToClear = [
             'receiverName', 'recSocialraison', 'receiverAdress', 
             'receiverTel', 'receiverVille', 'receiverPostal', 
-            'parcelWeight', 'longeur', 'largeur', 'hauteur',
-            'factureDetail', 'factureVal' // On vide aussi le modal
+            'parcelWeight', 'longeur', 'largeur', 'hauteur', 'recCountry', 'receiverMail',
+            'factureDetail', 'factureVal'
         ];
 
         fieldsToClear.forEach(id => {
             const field = document.getElementById(id);
-            if (field) field.value = ""; 
+            
+            if (field && field.tagName === 'SELECT' && id === 'recCountry') {
+                // Pour un select, on recherche l'option avec selected
+                const defaultOption = field.querySelector('option[selected]');
+                if (defaultOption) {
+                    field.value = defaultOption.value;
+                } else {
+                    // Si pas d'option selected, on prend la première
+                    field.selectedIndex = 0;
+                }
+            } else if (field) {
+                field.value = ""; 
+            }
         });
 
+        // IMPORTANT : Réinitialiser aussi le champ caché du prix
         if (document.getElementById('pricezone')) {
             document.getElementById('pricezone').innerText = "0.000 DT";
+        }
+        if (document.getElementById('parcelPrice')) {
+            document.getElementById('parcelPrice').value = "0";
         }
 
         // 3. MISE À JOUR DU TABLEAU DE SESSION (LISTE DES COLIS EN BAS)
@@ -265,15 +318,15 @@ async function validerEtImprimer() {
 
         // 4. Focus sur le téléphone du destinataire pour le suivant
         setTimeout(() => {
-            document.getElementById('receiverTel').focus();
+            const receiverTelField = document.getElementById('receiverTel');
+            if (receiverTelField) receiverTelField.focus();
         }, 500);
 
     } catch (err) {
         console.error("Erreur critique:", err);
         showNotification("Erreur lors de l'enregistrement : " + err.message, 'danger');
     }
-}
-// Fonction appelée au changement de pays
+}// Fonction appelée au changement de pays
 function toggleCountryLogic() {
     const country = document.getElementById('recCountry').value;
     const isTunisia = (country === 'Tunisie');
@@ -286,8 +339,8 @@ function toggleCountryLogic() {
 
     if (isTunisia) {
         // Afficher options Nationales
-        if(lblNat) lblNat.classList.remove('d-none');
-        if(lblFleurs) lblFleurs.classList.remove('d-none');
+      //  if(lblNat) lblNat.classList.remove('d-none');
+       // if(lblFleurs) lblFleurs.classList.remove('d-none');
         // Cacher options Internationales
         if(lblInt) lblInt.classList.add('d-none');
         if(lblRppi) lblRppi.classList.add('d-none');
@@ -357,39 +410,162 @@ function toggleExtraFields() {
     }
 }
 // Fonction de calcul de prix
-function calculerprix() {
-    let weight = parseFloat(document.getElementById('parcelWeight').value) || 0;
-    const service = document.querySelector('input[name="btnradio"]:checked').value;
-    const itemType = document.getElementById('itemType') ? document.getElementById('itemType').value : 'Document';
+window.calculerprix = function() {
+    const weight = parseFloat(document.getElementById('parcelWeight').value);
+    const destination = document.getElementById('recCountry') ? document.getElementById('recCountry').value : 'Tunisie';
     
-    // Calcul Poids Volumétrique (RPPI Marchandise uniquement)
-    if (service === 'RPPI' && itemType === 'Marchandise') {
-        const l = parseFloat(document.getElementById('longeur').value) || 0;
-        const w = parseFloat(document.getElementById('largeur').value) || 0;
-        const h = parseFloat(document.getElementById('hauteur').value) || 0;
-        const poidsVol = (l * w * h) / 5000;
-        weight = Math.max(weight, poidsVol);
+    // Validation
+    if (isNaN(weight) || weight <= 0) {
+        document.getElementById('pricezone').innerText = "";
+        document.getElementById('parcelPrice').value = "0";
+        return 0;
     }
+    
+    // Limite du test à 1kg
+    if (weight > 1) {
+        document.getElementById('pricezone').innerHTML = 
+            '<span class="text-warning fw-bold">TEST : 0-1kg seulement</span>';
+        document.getElementById('parcelPrice').value = "0";
+        return 0;
+    }
+    
+    // Définition claire des tarifs
+    const TARIFS_TEST = {
+        // [tarif_<0.5kg, tarif_0.5-1kg]
+        'Tunisie': [5, 7],
+        'Algeria': [39, 56],
+        'Qatar': [39, 56],
+        'France': [39, 65],
+        'Canada': [51, 78],
+        'Ukraine': [48, 77],
+        'Brazil': [61, 83],
+        'China': [60, 90],
+        // Par défaut (autres pays) : EMS International
+        'DEFAULT': [45, 65]
+    };
+    
+    // Calcul
+    const tarif = TARIFS_TEST[destination] || TARIFS_TEST['DEFAULT'];
+    const price = weight < 0.5 ? tarif[0] : tarif[1];
+    
+    // CORRECTION IMPORTANTE : Mettre à jour l'affichage ET le champ caché
+    const pricezone = document.getElementById('pricezone');
+    const parcelPrice = document.getElementById('parcelPrice');
+    
+    if (pricezone) {
+        pricezone.innerText = price.toFixed(3) + " DT";
+    }
+    
+    if (parcelPrice) {
+        parcelPrice.value = price.toFixed(3);
+        console.log("Prix mis à jour dans champ caché:", parcelPrice.value);
+    }
+    
+    return price;
+};
+function calculateLocalPrice(weight) {
+    if (weight <= 0) return 0;
+    
+    const localPrices = [
+        { max: 0.5, price: 5 },
+        { max: 1, price: 7 },
+        { max: 2, price: 9 },
+        { max: 5, price: 10 },
+        { max: 7, price: 12 },
+        { max: 12, price: 14 },
+        { max: 17, price: 20 },
+        { max: 22, price: 25 },
+        { max: 27, price: 30 },
+        { max: 30, price: 35 }
+    ];
+    
+    for (const range of localPrices) {
+        if (weight <= range.max) {
+            return range.price;
+        }
+    }
+    
+    return 0; // Pour poids > 30kg
+}
 
-    let price = 0;
-    // Vos tarifs personnalisés
-    const tarifs = {
+function calculateInternationalPrice(weight, service, itemType, destination) {
+    if (weight <= 0) return 0;
+    
+    // Calcul du poids volumétrique pour RPPI Marchandise
+    if (service === 'RPPI' && itemType === 'Marchandise') {
+        return calculateVolumetricPrice(weight, destination);
+    }
+    
+    // Tarifs standards pour services internationaux
+    const internationalTarifs = {
         'EMS National': { base: 7, kg: 1.5 },
         'EMS International': { base: 45, kg: 20 },
         'RPPI': { base: 18, kg: 10 },
         'Bouquet de fleurs': { base: 25, kg: 0 }
     };
-
-    if (weight > 0 || service === 'Bouquet de fleurs') {
-        const t = tarifs[service];
-        price = t.base + (weight * t.kg);
+    
+    if (internationalTarifs[service]) {
+        const t = internationalTarifs[service];
+        return t.base + (weight * t.kg);
     }
-
-    const zone = document.getElementById('pricezone');
-    if (zone) zone.innerText = price.toFixed(3) + " DT";
+    
+    return 0;
 }
 
+function calculateVolumetricPrice(weight, destination) {
+    const l = parseFloat(document.getElementById('longeur').value) || 0;
+    const w = parseFloat(document.getElementById('largeur').value) || 0;
+    const h = parseFloat(document.getElementById('hauteur').value) || 0;
+    
+    // Calcul du poids volumétrique
+    const poidsVol = (l * w * h) / 5000;
+    const effectiveWeight = Math.max(weight, poidsVol);
+    
+    // Tarifs par destination
+    const destinationPrices = {
+        "Algeria": [39, 56],
+        "Qatar": [39, 56],
+        "France": [39, 65],
+        "Canada": [51, 78],
+        "Ukraine": [48, 77],
+        "Brazil": [61, 83],
+        "China": [60, 90]
+    };
+    
+    if (!destinationPrices[destination]) return 0;
+    
+    const [priceUnderHalf, priceUnderOne] = destinationPrices[destination];
+    
+    if (effectiveWeight < 0.5) {
+        return priceUnderHalf;
+    } else if (effectiveWeight < 1) {
+        return priceUnderOne;
+    } else {
+        // Pour poids > 1kg, extrapoler
+        return priceUnderOne + Math.floor(effectiveWeight) * 30;
+    }
+}
 
+function updatePriceDisplay(price, weight, destination) {
+    const zone = document.getElementById('pricezone');
+    if (!zone) return;
+    
+    if (destination === 'Tunisie') {
+        if (weight > 30) {
+            zone.innerHTML = '<span class="text-danger">Max 30kg</span>';
+        } else if (weight > 0) {
+            zone.innerText = price.toFixed(3) + " DT";
+        } else {
+            zone.innerText = "";
+        }
+    } else {
+        if (weight > 0 && price > 0) {
+            zone.innerText = price.toFixed(3) + " DT";
+        } else {
+            zone.innerText = "";
+        }
+    }
+}
 function genererVueEtiquette(trackingId) {
     const sName = document.getElementById('senderName').value;
     const sTel = document.getElementById('senderTel').value;
@@ -465,6 +641,10 @@ function genererVueEtiquette(trackingId) {
                 document.getElementById('senderName').value = data.sendName;
                 document.getElementById('senderAdress').value = data.adress;
                 document.getElementById('senderPostal').value = data.postalCode;
+                document.getElementById('senderVille').value = data.city;
+                document.getElementById('sendEmail').value = data.sendEmail || '';
+                    document.getElementById('sendSocialReason').value = data.sendSocialReason || '';
+
                 
                 document.getElementById('senderName').classList.add('is-valid');
                 setTimeout(() => document.getElementById('senderName').classList.remove('is-valid'), 2000);
@@ -598,28 +778,7 @@ function genererVueEtiquette(trackingId) {
     }
     
     // Calcul du prix selon le poids
-    window.calculerprix = function() {
-        const weight = parseFloat(document.getElementById('parcelWeight').value) || 0;
-        let price = 0;
-        if (weight > 0 && weight <= 0.5) price = 5;
-        else if (weight <= 1) price = 7;
-        else if (weight <= 2) price = 9;
-        else if (weight <= 5) price = 10;
-        else if (weight <= 7) price = 12;
-        else if (weight <= 12) price = 14;
-        else if (weight <= 17) price = 20;
-        else if (weight <= 22) price = 25;
-        else if (weight <= 27) price = 30;
-        else if (weight <= 30) price = 35;
-
-        const zone = document.getElementById('pricezone');
-        if (weight > 30) zone.innerHTML = '<span class="text-danger">Max 30kg</span>';
-        else if (weight > 0) zone.innerText = price.toFixed(3) + " DT";
-        else zone.innerText = "";
-        return price;
-    };
-
-
+   
     
     // Fonction pour afficher des notifications
     function showNotification(message, type = 'info') {

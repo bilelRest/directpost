@@ -7,6 +7,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
+import tn.poste.myship.sec.AppUser;
 
 @Entity
 public class Parcel {
@@ -20,6 +21,8 @@ public class Parcel {
     private Double price;
     private Double weight;
     private Boolean delivered = false;
+    @OneToOne(cascade = CascadeType.ALL)
+    private AppUser appUser;
    // PLUSIEURS colis peuvent aller vers UN SEUL destinataire
     @ManyToOne 
     private Receiver receiver;
@@ -43,7 +46,7 @@ public class Parcel {
     public Parcel() {
     }
 
-    public Parcel(Double width, Double height, Double lenght, Double price, Double weight, Receiver receiver, Sender sender, TrackingNumber trackingNumber,Boolean delivered) {
+    public Parcel(AppUser appUser, Double width, Double height, Double lenght, Double price, Double weight, Receiver receiver, Sender sender, TrackingNumber trackingNumber, Boolean delivered) {
          this.delivered=delivered;
         this.width = width;
         this.height = height;
@@ -53,6 +56,7 @@ public class Parcel {
         this.receiver = receiver;
         this.sender = sender;
         this.trackingNumber = trackingNumber;
+        this.appUser = appUser;
     }
 
     public Double getWidth() {
@@ -125,5 +129,13 @@ public class Parcel {
 
     public void setDelivered(Boolean delivered) {
         this.delivered = delivered;
+    }
+
+    public AppUser getAppUser() {
+        return appUser;
+    }
+
+    public void setAppUser(AppUser appUser) {
+        this.appUser = appUser;
     }
 }

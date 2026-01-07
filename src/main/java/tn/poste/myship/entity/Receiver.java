@@ -17,17 +17,20 @@ public class Receiver {
     private Long postalCode;
     private String country;
     private String city;
+    private String recEmail;
 
     public Receiver() {
     }
 
-    public Receiver(String recName, String recSocialReason, Long recTel, String adress, Long postalCode,String country, String city) {
+    public Receiver(String recName, String recSocialReason, Long recTel, String adress, Long postalCode,String country, String city, String recEmail) {
         this.country=country;
         this.recName = recName;
         this.recSocialReason = recSocialReason;
         this.recTel = recTel;
         this.adress = adress;
         this.postalCode = postalCode;
+        this.city = city;
+        this.recEmail = recEmail;
     }
 
     public Long getRecId() {
@@ -92,5 +95,13 @@ public class Receiver {
 
     public void setCity(String city) {
         this.city = city;
+    }
+
+    public String getRecEmail() {
+        return recEmail;
+    }
+
+    public void setRecEmail(String recEmail) {
+        this.recEmail = recEmail;
     }
 }

@@ -56,9 +56,10 @@ public String reserve(@ModelAttribute Parcel parcel){
     parcel.setTrackingNumber(trackingNumber);
 
     // 2. Calcul du prix (inchangé)
-    Double weight = parcel.getWeight();
-    Double prix = calculPrix(weight); // Déporté en méthode pour la clarté
-    parcel.setPrice(prix);
+    //Double weight = parcel.getWeight();
+    //Double prix = parcel.getPrice();
+    //  // Déporté en méthode pour la clarté
+    // parcel.setPrice(prix);
 
     // 3. --- LE CORRECTIF ICI ---
     // Au lieu de setSendId, on remplace tout l'objet par celui géré par JPA
