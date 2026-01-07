@@ -23,9 +23,10 @@
                 <div class="col-md-3"><label for="sendSocialReason">Raison Sociale</label><input id="sendSocialReason" name="sender.sendSocialReason" type="text" class="form-control form-control-sm" placeholder="Raison Sociale"></div>
                 <div class="col-md-4"><label for="senderAdress">Adresse</label><input id="senderAdress" name="sender.adress" type="text" class="form-control form-control-sm" placeholder="Adresse"></div>
                 <div class="col-md-2"><label for="senderVille">Ville</label><input id="senderVille" name="sender.city" type="text" class="form-control form-control-sm" placeholder="Ville"></div>
-                 <div class="col-md-2"><label for="sendEmail">Email</label><input id="sendEmail" name="sender.sendEmail" type="email" class="form-control form-control-sm" placeholder="Email"></div>
                 <div class="col-md-2"><label for="senderPostal">Code Postal</label><input id="senderPostal" name="sender.postalCode" type="text" class="form-control form-control-sm" placeholder="CP"></div>
-                <div class="col-md-1"><label for="senderCountry">Pays</label><input id="senderCountry" name="sender.country" value="Tunisie" class="form-control form-control-sm bg-light" readonly></div>
+                <div class="col-md-1"><label for="senderCountry">Gouvernorat</label><input id="senderCountry" name="sender.country" value="Tunisie" class="form-control form-control-sm bg-light" readonly></div>
+              <div class="col-md-2"><label for="sendEmail">Email</label><input id="sendEmail" name="sender.sendEmail" type="email" class="form-control form-control-sm" placeholder="Email"></div>
+
             </div>
         </div>
     </div>
@@ -53,9 +54,10 @@
                 <div class="col-md-2"><label for="recSocialraison">Raison Sociale</label><input id="recSocialraison" name="receiver.recSocialReason" type="text" class="form-control form-control-sm" placeholder="Raison Sociale"></div>
                 <div class="col-md-3"><label for="receiverAdress">Adresse</label><input id="receiverAdress" name="receiver.adress" type="text" class="form-control form-control-sm" placeholder="Adresse" required></div>
                 <div class="col-md-2"><label for="receiverVille">Ville</label><input id="receiverVille" name="receiver.ville" type="text" class="form-control form-control-sm" placeholder="Ville" required></div>
+                 <div class="col-md-2"><label for="gouvernorat">Gouvernorat</label><input id="gouvernorat"  type="text" class="form-control form-control-sm" placeholder="Gouvernorat" required></div>
+                <div class="col-md-2"><label for="receiverPostal">Code Postal</label><input id="receiverPostal" name="receiver.postalCode" type="text" class="form-control form-control-sm" placeholder="CP"></div>
                 <div class="col-md-2"><label for="receiverTel">Téléphone</label><input id="receiverTel" name="receiver.recTel" type="tel" class="form-control form-control-sm" placeholder="Téléphone" ></div>
                 <div class="col-md-2"><label for="receiverMail">Email</label><input id="receiverMail" name="receiver.recEmail" type="email" class="form-control form-control-sm" placeholder="Email" ></div>
-                <div class="col-md-2"><label for="receiverPostal">Code Postal</label><input id="receiverPostal" name="receiver.postalCode" type="text" class="form-control form-control-sm" placeholder="CP"></div>
             </div>
         </div>
     </div>
@@ -150,10 +152,14 @@
             <div class="col-12">
                 <div class="card shadow border-0">
                     <div class="card-header bg-light text-dark d-flex justify-content-between align-items-center py-3">
-                        <h5 class="mb-0 fw-bold"><i class="bi bi-collection me-2 text-warning"></i>Session en cours</h5>
-                        
+                        <h5 class="mb-0 fw-bold"><i class="bi bi-collection me-2 text-warning"></i>Mode de payment</h5>
+                        <select id="sessionFilter" class="form-select form-select-sm w-auto" onchange="filterSessionTable()">
+                            
+                            <option value="thisWeek">Espèce</option>
+                            <option value="thisMonth">Chèque</option>
+                        </select>
                         <button type="button" class="btn btn-info btn-lg px-5 shadow" onclick="imprimerBordereauFinal()">
-                            <i class="bi bi-printer-fill me-2"></i>Imprimer le Bordereau de Session
+                            <i class="bi bi-printer-fill me-2"></i>Confirmer
                         </button>
                     
                         <span class="badge bg-primary px-3 py-2 fs-6" id="colisCount">0 Colis</span>
