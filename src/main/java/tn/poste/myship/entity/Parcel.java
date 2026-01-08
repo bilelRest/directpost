@@ -5,6 +5,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import tn.poste.myship.sec.AppUser;
@@ -21,6 +22,9 @@ public class Parcel {
     private Double price;
     private Double weight;
     private Boolean delivered = false;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "op_id")    
+    private Operation operation;
     @OneToOne(cascade = CascadeType.ALL)
     private AppUser appUser;
    // PLUSIEURS colis peuvent aller vers UN SEUL destinataire
@@ -46,8 +50,9 @@ public class Parcel {
     public Parcel() {
     }
 
-    public Parcel(AppUser appUser, Double width, Double height, Double lenght, Double price, Double weight, Receiver receiver, Sender sender, TrackingNumber trackingNumber, Boolean delivered) {
-         this.delivered=delivered;
+    public Parcel(Operation operation,AppUser appUser, Double width, Double height, Double lenght, Double price, Double weight, Receiver receiver, Sender sender, TrackingNumber trackingNumber, Boolean delivered) {
+        this.operation=operation; 
+        this.delivered=delivered;
         this.width = width;
         this.height = height;
         this.lenght = lenght;
@@ -137,5 +142,13 @@ public class Parcel {
 
     public void setAppUser(AppUser appUser) {
         this.appUser = appUser;
+    }
+
+    public Operation getOperationId() {
+        return operation;
+    }
+
+    public void setOperationId(Operation operation) {
+        this.operation = operation;
     }
 }

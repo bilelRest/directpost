@@ -1,6 +1,7 @@
 package tn.poste.myship.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -31,16 +32,19 @@ public class Client {
     }
     @GetMapping("/check/parcel")
     @ResponseBody
-    public List<Parcel> validateClient(@RequestParam("tel") Long tel,@RequestParam(value="validate", required=false) Boolean validate) {
-        List<Parcel> parcels= parcelRepo.findBySendTelAndDeliveredFalse(tel);
+    public Map<String, Object> validateClient(@RequestParam("op") Long op,@RequestParam(value="validate", required=false) Boolean validate) {
+        System.out.println("Opération ID reçue: " + op);
+        List<Parcel> parcels= parcelRepo.findByOperationIdAndDeliveredFalse(op);
+        String opFormatted="";
         if( validate!=null && validate){
             for (Parcel parcel : parcels) {
                 parcel.setDelivered(true);
+                opFormatted=parcel.getOperationId().getFormattedOpId();
                 parcelRepo.save(parcel);
             }
         }
-       
-        return parcels;
+
+        return Map.of("opFormatted", opFormatted, "parcels", parcels);
     }
 @GetMapping("/check/sender")
 @ResponseBody

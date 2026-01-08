@@ -37,5 +37,9 @@ public interface ParcelRepo extends JpaRepository< Parcel,Long> {
                                     @Param("dateFin") LocalDate dateFin);
     @Query("SELECT p FROM Parcel p WHERE p.sender.sendTel = :tel AND p.delivered = false")
     public List<Parcel> findBySendTelAndDeliveredFalse(Long tel);
+
+
+    @Query("SELECT p FROM Parcel p WHERE p.operation.opId = :op AND p.delivered = false")
+    public List<Parcel> findByOperationIdAndDeliveredFalse(Long op);
     }
 

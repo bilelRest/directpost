@@ -1,5 +1,6 @@
 package tn.poste.myship.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
@@ -17,11 +18,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import tn.poste.myship.entity.Operation;
 import tn.poste.myship.entity.Parcel;
 import tn.poste.myship.entity.Pochette;
 import tn.poste.myship.entity.Receiver;
 import tn.poste.myship.entity.Sender;
 import tn.poste.myship.entity.TrackingNumber;
+import tn.poste.myship.repo.OperationRepo;
 import tn.poste.myship.repo.ParcelRepo;
 import tn.poste.myship.repo.PochetteRepo;
 import tn.poste.myship.repo.ReceiverRepo;
@@ -45,9 +48,15 @@ public class Passenger {
     TrackingNumberRepo trackingNumberRepo;
 @Autowired
     PochetteRepo pochetteRepo;
-
+@Autowired
+OperationRepo operationRepo;
     @GetMapping("/national")
     public String passenger(Model model) {
+        Operation operation=new Operation();
+        operation.setParcel(new ArrayList<>());
+        operation.setPochette(new ArrayList<>());
+        operationRepo.save(operation);
+        model.addAttribute("operation",operation);
         Parcel parcel = new Parcel();
         parcel.setSender(new Sender());
         parcel.setReceiver(new Receiver());
@@ -126,10 +135,13 @@ public ResponseEntity<Map<String, Object>> ajouterPochette(
 }
     @PostMapping(value = "reserve")
 @ResponseBody
-public String reserve(@ModelAttribute Parcel parcel){
+public String reserve(@ModelAttribute Parcel parcel,@RequestParam(value="operationId") Long operationId) {
 
     // 1. Gérer le numéro de suivi
     TrackingNumber trackingNumber = new TrackingNumber();
+   Optional< Operation> operation = operationRepo.findById(operationId);
+   if (operation.isPresent()) {
+       parcel.setOperationId(operation.get());
     trackingNumberRepo.save(trackingNumber);
     parcel.setTrackingNumber(trackingNumber);
 
@@ -151,8 +163,10 @@ public String reserve(@ModelAttribute Parcel parcel){
     parcelRepo.save(parcel);
 
     return trackingNumber.getFormattedParcelId();
+   } else {
+       throw new IllegalArgumentException("Opération invalide avec l'ID: " + operationId);
 }
-
+}
 // Petite fonction helper pour nettoyer le contrôleur
     @GetMapping(value = "success")
     public String success(Model model, @RequestParam(value = "track")String track){
